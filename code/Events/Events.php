@@ -3,15 +3,15 @@
 class Events extends DataObject {
 
 	  	static $api_access = true;
-   function canView() { return true; }
+        function canView() { return true; }
    
    
     static $db = array(
 	  'Name' =>  'Text',
  		
-		'Day' => 'Int', 
-	  	'Month' =>  'Int',
-	  	'Year' => 'Int', 
+	   'Day' => 'Int', 
+	   'Month' =>  'Int',
+	  'Year' => 'Int', 
 	  
 	  'Information' => 'Text',
 	  
@@ -23,8 +23,6 @@ class Events extends DataObject {
 	  'RuleRanStart' => 'Int',
 	  'RuleRanEnd' => 'Int'
 
-
-
    );
 	
 	 static $defaults = array(
@@ -32,23 +30,22 @@ class Events extends DataObject {
   	);
   
 	 static $has_one = array(
+	 	    //'KnownAs' => 'Person', //Main linkage
+
 		   'Location' => 'Loc',
 		   'SourceFile' => 'File',
 		   'Source' => 'Sources',
-
-
    );
 	 
 	 
-	 static $has_many = array(
+	static $has_many = array(
 		'Data' => 'EventData'					  
   	);
 	 
 
    static $many_many = array(
 	    'Group' => 'myGroups',
-	     'InformationPage' => 'InformationPage',
-
+	    'InformationPage' => 'InformationPage',
 	);
 		 
 	
@@ -177,10 +174,10 @@ class Events extends DataObject {
 
 
 			$locs= DataObject::get('Loc');
-		 	$locs->sort("Name", "ASC");
-		 	$map = $locs->toDropDownMap('ID', 'Name');
-		 	$dropdownfield = new DropdownField("LocationID", "Location", $map);
-		    $fields-> addFieldToTab('Root.Main', $dropdownfield, 'SourceFile' );
+		 	//$locs->sort("Name", "ASC");
+		 	//$map = $locs->toDropDownMap('ID', 'Name');
+		 	//$dropdownfield = new DropdownField("LocationID", "Location", $map);
+		    //$fields-> addFieldToTab('Root.Main', $dropdownfield, 'SourceFile' );
 		 
 		 
 	

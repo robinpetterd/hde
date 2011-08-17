@@ -3,7 +3,9 @@
 class EventData extends DataObject {
  
    	static $api_access = true;
-   function canView() { return true; }
+    
+	function canView() { return true; }
+   
     static $db = array(
 
    );

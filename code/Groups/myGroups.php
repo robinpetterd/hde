@@ -79,11 +79,11 @@ class myGroups extends DataObject  {
 			
 		
 			
-			$locs= DataObject::get('Loc');
-		 	$locs->sort("Name", "ASC");
-		 	$map = $locs->toDropDownMap('ID', 'Name');
-		 	$dropdownfield = new DropdownField("LocationID", "Location", $map);
-		    $fields-> addFieldToTab('Root.Main', $dropdownfield, 'SourceID' );
+			//$locs= DataObject::get('Loc');
+		 	//$locs->sort("Name", "ASC");
+		 	//$map = $locs->toDropDownMap('ID', 'Name');
+		 	//$dropdownfield = new DropdownField("LocationID", "Location", $map);
+		    //$fields-> addFieldToTab('Root.Main', $dropdownfield, 'SourceID' );
 		 
 		 		$fields->removeByName('Information Page');
 
