@@ -1,0 +1,118 @@
+8
+
+dir
+2081
+http://simile-widgets.googlecode.com/svn/exhibit/tags/2.2.0/src/webapp/api/scripts/ui
+http://simile-widgets.googlecode.com/svn
+
+
+
+2009-03-04T19:33:27.217230Z
+1809
+ryanlee@csail.mit.edu
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+579c892a-5248-0410-a714-2bcf037eb5bf
+
+coders
+dir
+
+facets
+dir
+
+widgets
+dir
+
+ui.js
+file
+
+
+
+
+2010-03-15T03:47:20.000000Z
+810d0ac4c6d101085599a8d6c144cd52
+2008-11-16T22:33:25.528002Z
+1683
+dfhuynh
+has-props
+
+ui-context.js
+file
+
+
+
+
+2010-03-15T03:47:20.000000Z
+6d81381940d230aa5ecfc3ecd4bc0e5c
+2008-08-15T06:11:12.488236Z
+1443
+sbostler
+has-props
+
+lens.js
+file
+
+
+
+
+2010-03-15T03:47:20.000000Z
+4fbc2496cbc8739a83e474c15246ce6e
+2008-12-15T06:36:20.593858Z
+1716
+dfhuynh
+has-props
+
+views
+dir
+
+format-parser.js
+file
+
+
+
+
+2010-03-15T03:47:20.000000Z
+1eebef8e20b40c556d3b2b8efe7d022d
+2007-06-29T20:56:27.742578Z
+722
+dfhuynh
+has-props
+
+formatter.js
+file
+
+
+
+
+2010-03-15T03:47:20.000000Z
+441db571d4457f2392228705d4f90237
+2007-08-23T16:33:49.623731Z
+1107
+dfhuynh
+has-props
+
+coordinator.js
+file
+
+
+
+
+2010-03-15T03:47:20.000000Z
+0ca643d5ffbddd1f80a4104d34d0333c
+2007-08-09T17:07:40.092484Z
+1005
+dfhuynh
+has-props
+

@@ -1,0 +1,192 @@
+<?php 
+
+class Events extends DataObject {
+
+	  	static $api_access = true;
+   function canView() { return true; }
+   
+   
+    static $db = array(
+	  'Name' =>  'Text',
+ 		
+		'Day' => 'Int', 
+	  	'Month' =>  'Int',
+	  	'Year' => 'Int', 
+	  
+	  'Information' => 'Text',
+	  
+	  'RuleBased' => 'Boolean',
+	  'RuleIsEveryone' => 'Boolean',
+	  'RuleRanStart' => 'Int',
+	  'RuleRanEnd' => 'Int'
+
+
+
+   );
+	
+	 static $has_one = array(
+		   'Location' => 'Loc',
+		   'SourceFile' => 'File',
+		   'Source' => 'Sources',
+
+
+   );
+	 
+	 
+	 static $has_many = array(
+		'Data' => 'EventData'					  
+  	);
+	 
+
+   static $many_many = array(
+	    'Group' => 'myGroups',
+	     'InformationPage' => 'InformationPage',
+
+	);
+		 
+	
+   static $searchable_fields = array(
+	 'Name','Year',
+   );
+   
+     static $summary_fields = array(
+	   'Name','Year','ID',
+
+   );
+	   
+	   
+  
+    function getCMSFields() {
+		   
+			 /*
+			 BUG - FUTURE this is a work around to get stuff work with 
+			 */
+			 
+			 //Do the people 
+			 $fields = parent::getCMSFields();
+		 
+			 // $fields->removeByName('Data');
+		
+			$fields->renameField('Data','People');
+			  
+			  
+			  
+			  
+			  //Do the same thing for the groups 
+			  
+			  
+			  $fields->removeByName('Group');
+		 
+			  $groupTablefield = new ManyManyDataObjectManager(
+				 $this,
+				 'Group',
+				 'myGroups',
+				 array(
+				'Name' => 'Name'
+				 )
+			  );
+			 
+			// $peopleTablefield->setAddTitle( 'A Module' );
+		 
+			  $fields->addFieldToTab("Root.Group or Groups", $groupTablefield);
+			  
+			  
+		  
+		 $fields->removeByName('Information Page');
+
+			$infoOnTablefield = new ManyManyDataObjectManager(
+				 $this,
+				'InformationPage',
+				'InformationPage',
+				 array(
+					'Summary' => 'Summary'
+				 ),'	'
+			  );
+		
+			$fields->addFieldToTab("Root.Information Pages", $infoOnTablefield);
+
+			
+			$fields->removeByName('Data');
+			
+			/*$EDataTablefield = new HasOneComplexTableField  (
+				 $this,
+				'Data',
+				'EventData',
+				 array(
+					'KnownAs' => 'KnownAs' )
+			  ,'');
+
+		   $fields->addFieldToTab("Root.Event People", $EDataTablefield);*/
+
+								
+			 $fields->removeByName('Rule Based');
+			 $fields->removeByName('RuleIsEveryone');
+
+
+		
+		$isRuleForm = new CheckboxField ($name = "RuleBased",
+ 	    $title = "This is a rule base event"); 
+		
+		$fields->addFieldToTab("Root.Rules", $isRuleForm);
+
+		$everyOneForm = new CheckboxField ($name = "RuleIsEveryone",
+ 	    	 $title = "This rule is for everyone"); 
+			 
+		$fields->addFieldToTab("Root.Rules", $everyOneForm);
+		
+		 //$fields->removeByName('Rule Based');
+		 //$fields->removeByName('RuleIsEveryone');
+
+
+
+
+			 
+			 
+
+
+  
+
+		
+		
+			
+			
+
+
+			 
+			
+			//$fields->removeByName('Traveling On');
+			  $fields->removeByName('Location');
+
+
+			$locs= DataObject::get('Loc');
+		 	$locs->sort("Name", "ASC");
+		 	$map = $locs->toDropDownMap('ID', 'Name');
+		 	$dropdownfield = new DropdownField("LocationID", "Location", $map);
+		    $fields-> addFieldToTab('Root.Main', $dropdownfield, 'SourceFile' );
+		 
+		 
+	
+			
+		 
+			
+			
+			  return $fields;
+   }
+   
+   
+     
+	public function populateDefaults(){
+    	parent::populateDefaults();
+		
+		//$workflow = DataObject::get_by_id('WorkFlow', 1);
+		 		
+		//$this->CountryID = $countries->First()->ID;
+
+
+		
+			
+	}
+ 
+};
+
+?>

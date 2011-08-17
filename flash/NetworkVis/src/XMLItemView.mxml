@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<!-- XMLItemView.mxml is the item renderer component for one XML item. We simply display the 'prop' 
+	     attribute of the XML item in a colored box. -->
+		
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" toolTip=""  creationComplete="init()">
+
+	<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" id="myBox" x="0" y="37" backgroundAlpha=".5" verticalGap ="-5" >
+	<mx:Text  id="myText" fontWeight="" fontSize="9" text="{data.data.@name}"  color="#000000" width="100"   selectable="false"/>	
+	  
+  </mx:VBox>
+  
+	<mx:Script>
+		<![CDATA[
+			
+			 import mx.controls.ToolTip;
+             import mx.managers.ToolTipManager;
+			 import mx.styles.StyleManager;
+			 
+			import mx.effects.Glow;
+			import com.adobe.flex.extras.controls.springgraph.Graph;
+			import com.adobe.flex.extras.controls.springgraph.Item;
+			import mx.core.Application;
+			
+			
+			public function init():void {
+					if ( data.data.@role == "Black") { 
+						myBox.setStyle("backgroundColor", 0x000000);
+						myText.setStyle("color", 0xffffff );
+					}
+					if ( data.data.@role == "White") { 
+						myBox.setStyle("backgroundColor",0xffffff )
+					}
+					if ( data.data.@role == "Mulatto") {
+						myBox.setStyle("backgroundColor", 0x333333);
+						myText.setStyle("color", 0xffffff );
+
+					}
+				}  
+	 
+	 			public function doubleClick(event: Event): void {
+				app().itemDoubleClick(event);
+			}
+			
+			private function app(): visualise {
+				return Application.application as visualise;
+			}
+				private function buildToolTip():String {
+					
+					var tooltip:String =  ""; 
+					
+					
+					if ( data.data.@role == "slave") { 
+						
+						tooltip = tooltip + data.data.@name + ' was ' + data.data.@age + ' when ' + data.data.@gender + ' ran from ' + data.data.@region; 
+						
+						if ( data.data.@run != "") { 
+							tooltip = tooltip +  ' in ' + data.data.@run; 
+						}
+						tooltip = tooltip + '.\n\n' + data.data.@narrative;
+					
+					} else {
+					
+						tooltip = tooltip +  data.data.@narrative;
+					
+					}
+					 
+					return tooltip;
+				}
+			
+				private function buildRanGraphic():String {
+					
+					var RanGraphic: String =  ""; 
+					
+					if ( data.data.@role == "slave") { 
+						
+						if (data.data.@run =="1779") {
+						
+							RanGraphic = "1779.swf";
+
+						} else {
+						
+							RanGraphic = "1776.swf";
+
+						}
+						//RanGraphic = RanGraphic + data.data.@ran + '.swf';	
+	
+					} else {
+					
+					
+					}
+					 
+					return RanGraphic;
+				}
+				
+				private function buildReligionGraphic():String {
+					
+					var theGraphic: String =  ""; 
+					
+						
+						if (data.data.@religion =="Methodist") {
+						
+							theGraphic = "Methodist.swf";
+
+					
+						//RanGraphic = RanGraphic + data.data.@ran + '.swf';	
+	
+					} 
+					 
+					return theGraphic;
+				}
+				
+				private function buildPoliticsGraphic():String {
+					
+					var theGraphic: String =  ""; 
+					
+					if ( data.data.@role == "owner") { 
+
+						if (data.data.@politics == "Loyalist") {
+						
+							theGraphic = "Loyalist.swf";
+
+						} else if (data.data.@politics == "Patriot") {
+							theGraphic = "Patriot.swf";
+						} else if (data.data.@politics == "Loyalist Maybe") {
+							theGraphic = "LoyalistMaybe.swf";
+						}
+					} 
+					return theGraphic;
+				}
+				
+				
+				
+
+			/* This function gets called whenever the graph's current item changes,
+			 * or when our data changes, to calculate the borderthickness.
+			 */
+			private function calcFilters(currentItem: Item, item: Item): Array {
+				
+				if(app().roamer.currentItem == item) {
+					return [new GlowFilter(0xCC0000, 0.5, 8, 8, 2, 1)];
+				} else if(app().roamer.hasBeenCurrentItem(item)) {
+					return [new GlowFilter(0x990000, 0.3, 6, 6, 2, 1)];
+				} else {
+					return null;
+				} 
+				return null; 
+			}
+			
+
+		]]>
+	</mx:Script>				
+</mx:Canvas>
+				

@@ -1,0 +1,679 @@
+<?php 
+
+class BONData extends  EventData {
+   
+    static $db = array(
+      'FirstName' => 'Varchar', //From the BON
+	  'LastName' => 'Varchar', //From the BON
+	  'Age' => 'Float', //From the BON 
+	  'Description' => 'Text', //From the BON
+	  
+	  'TimeLeft' => 'Varchar',  //From the BON
+	  //'NumberOfYearsDeparted' => 'Varchar',  //From the BON
+	  'AssumedRanDate' => 'Int', //From the BON correct field 
+	  'CertificateOfFreedom' => 'Boolean',  //From the BON
+	  'CertificateOfFreedomMusgrave' => 'Boolean',  //From the BON
+
+	  'BornFree' => 'Boolean',  //From the BON
+	   'Remarks' => 'Text', //From the BON that don't fit elsewhere 
+	  'Narrative' => 'Text',  //What the data entry person thought
+   );
+
+
+   static $has_one = array(
+	 'TravelingOn' => 'Ship',
+	 'Service' => 'myGroups', 
+	 'BornLocation' => 'Loc', 
+
+   );
+   
+   	static $has_many = array(
+
+	);
+
+	static $many_many = array(
+							  
+			'TravelingWith'=>'Person',
+		    'Sponsor' => 'Person',			
+		    'Owner' => 'Owner', 
+
+		);
+
+	
+	  
+  static $searchable_fields = array(
+       'FirstName', 'LastName'
+   );
+ 
+   
+
+									
+    static $summary_fields = array(
+     'KnownAs.Name','FirstName', 'LastName'
+   );
+	
+
+//* a simple getter to make the travelling with work  on both sides*/ 
+function getTraveling() {
+	
+	$resultDataObjectSet = new DataObjectSet();
+ 	
+	//Fine which other BON enter have this person listed as 
+	
+	$eventDataSet = DataObject::get(
+			 "BONData",
+			 "BONData_TravelingWith.PersonID = {$this->KnownAs()->ID}",
+			 "",
+			 "LEFT JOIN BONData_TravelingWith ON BONData.ID =  BONData_TravelingWith.BONDataID",
+			 ""
+											
+			);
+	
+	//Debug::show($eventDataSet);
+		
+		
+	return $eventDataSet;
+
+}
+
+function getCorrectedAge() {
+	
+			$age = $this->Age ; 
+			if(intval($age) - $age == 0) {
+							$age = $this->Age ; 
+				} else {
+							//The number must be some like lik 1.5 so turn that in months.
+							$age = $this->Ag ; 
+			 			    
+							//Debug::show("not a whole number");
+			  			   // Debug::show($age);
+			
+			
+							$age = round($this->Age * 12) ; 
+							$age = $age . " months";
+							  		//	    Debug::show($age);
+			
+				}
+
+		return $age ;
+
+}
+	
+function onBeforeWrite() {
+   		
+	  $WriteCookie = new Cookie;
+      $WriteCookie->set('LastShipID', $this->TravelingOnID);
+	  
+	// $WriteCookie->set('LastOwnerID', $this->OwnerID);
+	  $WriteCookie->set('LastSponsorID', $this->SponsorID);
+	 $WriteCookie->set('SourceFileID', $this->SourceFileID);
+	 	 $WriteCookie->set('KnownAsID', $this->KnownAsID);
+
+
+
+	 
+			 $where = 'Name = "Evacuation of New York"';
+			
+			$ThisEvent = DataObject::get_one('Events', $where );
+		  //  Debug::show($ThisEvent);
+			
+		  	//Debug::show($ThisEvent->ID);
+		   $this->EventID = $ThisEvent->ID;
+		   
+		   
+
+	 // $ShipCookie->set('LastShipName', $this->TravelingOn.Name);
+
+    	  
+		//Debug::show($this->TravelingOnID); 
+		//Debug::message(�Wow, that�s great�):
+    	parent::onBeforeWrite();
+}
+  
+  
+   function getOwned() {
+				
+		/*$Owned = DataObject::get('BONData'
+								
+								
+		); */	
+		//Debug::show($this->Owner());
+		return $this->Owner();
+
+   }
+	
+ function getCMSFields() {
+		   
+			
+			
+			/*
+			 BUG - FUTURE this is a work around to get stuff work with 
+			 */
+			 
+			 $fields = parent::getCMSFields();
+			 $fields = $this->removeFields($fields); 
+
+		 
+		 	//----------- TABS ---------------------//
+			
+			 $fields->removeByName('Sponsor'); //Removes the My Groups from the People area.
+
+			 
+			 $fields->removeByName('TravelingWith');
+			 
+			 
+			 $fields->removeByName('Relationships');
+
+			
+			
+			$relTablefield = new ManyManyComplexTableField(
+				 $this,
+			 	'Relationships',
+				'EventRelationship',
+				 array('myName'=>'Name', 'ID'=>'Relationship ID','Created'=>'Created'
+				),null// sourceFilter
+			  );
+				
+				$relTablefield->setPageSize(1000);
+				
+				$relTablefield->setAddTitle( 'A Relative' );
+			
+			
+			  $fields->addFieldToTab("Root.Relatives", $relTablefield);
+
+		
+			  $peopleTablefield = new  ManyManyDataObjectManager(
+				 $this,
+				 'TravelingWith',
+				 'Person',
+				 array(
+				'Name' => 'Name'
+				 )
+			  );
+			 
+			 $peopleTablefield->setFilter(
+				   'Name', // The field we're filtering
+				   'Filter by possible names', // The label for the filter field
+				   array(
+					 '',
+					 $this->FirstName . ' ' . $this->LastName  => $this->FirstName . ' ' . $this->LastName ,
+					  $this->FirstName   => $this->FirstName  ,
+					  $this->LastName  =>  $this->LastName ,
+					   
+				   ) // The dropdown map of values => display text. The values will be matched against the Author field.
+				);
+						
+						
+					
+		    $fields->addFieldToTab("Root.TravelingWith", $peopleTablefield);
+
+	
+		//-----------RE-ORDER and Reworking of the other data fields -----------///
+	
+		    //$fields->removeByName('Known As');
+
+
+			$fields->addFieldToTab("Root.Main",new HeaderField (
+ 					   
+					   $title = $this->FirstName . ' ' . $this->LastName ,
+    					
+						$headingLevel = "1"
+			));
+
+
+			$fields->addFieldToTab("Root.Main",new HeaderField (
+ 					   $title = "Who is this person known as ID is " . $this->KnownAsID ." AFTER IT HAS SAVED MAKE SURE THE ID IS NOT 0", 
+    					$headingLevel = "3"
+			));
+					
+			
+			$knowasOnTablefield = new HasOneDataObjectManager (
+				 $this,
+				'KnownAs',
+				'Person',
+				 array(
+				'Name' => 'Name'
+				 ),'CMSFields_forPopup'
+			  );
+			
+
+	 
+				$knowasOnTablefield->setFilter(
+				   'Name', // The field we're filtering
+				   'Filter by possible names', // The label for the filter field
+				   array(
+					 '',
+					 $this->FirstName . ' ' . $this->LastName  => $this->FirstName . ' ' . $this->LastName ,
+					  $this->FirstName   => $this->FirstName  ,
+					  $this->LastName  =>  $this->LastName ,
+					   
+				   ) // The dropdown map of values => display text. The values will be matched against the Author field.
+				);
+						
+			    $fields->addFieldToTab("Root.Main", $knowasOnTablefield);
+
+			
+
+
+		      //----------- WHICH SHIP -----------///
+
+			 $fields->removeByName('Traveling On');
+			
+			
+			$fields->addFieldToTab("Root.Main",new HeaderField (
+ 					   $title = "Which ship are they traveling on",
+    					$headingLevel = "3"
+			));
+				
+			
+			
+			
+			$TravelingOnTablefield = new HasOneDataObjectManager(
+				 $this,
+				 'TravelingOn',
+				 'Ship',
+				 array(
+				'Name' => 'Name'
+				 )
+			  );
+			
+			
+		    /* $ShipCookie = new Cookie;
+			 
+			 if ($ShipCookie->get('LastShipID')) { 
+				$LastShip =  $ShipCookie->get('LastShipID'); 
+				$LastShipRecord = DataObject::get_by_id('Ship', $LastShip);
+				$LastShipName = $LastShipRecord->Name;  
+			 } else {
+				 
+				 $LastShip = 0; 
+				 $LastShipName = 'no last ship found'; 
+				 
+			 };
+				
+		
+		 
+		 
+			
+			$TravelingOnTablefield->setFilter(
+				   'ID', // The field we're filtering
+				   'Filter by the last ship ID', // The label for the filter field
+				   array(
+							''=>'', 
+							$LastShip  =>  $LastShipName, 
+							
+				   ) // The dropdown map of values => display text. The values will be matched against the Author field.
+				);*/
+					
+					
+					
+
+			
+			  $fields->addFieldToTab("Root.Main", $TravelingOnTablefield);
+
+	
+				 
+			
+		     //----------- First and Last name, description   -----------///
+
+				 
+			 $fields->removeByName('First Name');
+			 $fields->removeByName('Last Name');
+			 $fields->removeByName('Age'); 
+			 $fields->removeByName('Description'); 
+
+
+					
+
+			 $fields->addFieldToTab("Root.Main", new TextField(
+				   $name = 'FirstName',
+				   $title = "First Name",
+				   $value = ""
+			  ));
+			
+			$fields->addFieldToTab("Root.Main", new TextField(
+				   $name = 'LastName',
+				   $title = "Last Name",
+				   $value = ""
+			  ));
+				 
+				 
+				$fields->addFieldToTab("Root.Main", new NumericField(
+				   $name = 'Age',
+				   $title = "Age",
+				   $value = ""
+			  ));
+				
+				
+			 $fields->addFieldToTab("Root.Main", new TextField(
+				   $name = 'Description',
+				   $title = "Description",
+				   $value = ''
+			  ));
+				
+				
+			
+					 //-----------  Sponsor  -----------///
+	
+	   $fields->removeByName('Sponsor');
+		
+	
+		$fields->addFieldToTab("Root.Main",new HeaderField (
+ 					   $title = "Sponsor/Voucher",
+    					$headingLevel = "3"
+			));
+				
+				
+			 $sponsorTablefield = new ManyManyDataObjectManager (
+				 $this,
+				 'Sponsor',
+				 'Person',
+				 array(
+				'Name' => 'Name'
+				 ),'getCMSFields'
+			  );
+
+
+		$Cookie = new Cookie;
+		
+			if ($Cookie ->get('LastSponsorID'))	{
+					$LastSponsor= $Cookie ->get('LastSponsorID'); 
+					$LastSponsorRecord = DataObject::get_by_id('Owner', $LastSponsor);
+					//$LastSponsorName =  $LastSponsorRecord->Name; 
+				} else {
+					
+					$LastSponsor = 0; 
+					$LastSponsorName = 'no last sponsor found'; 
+					
+			};
+		
+			
+			
+			 $sponsorTablefield->setFilter(
+				   'Name', // The field we're filtering
+				   'Filter by possible names', // The label for the filter field
+				   array(
+						' '  =>  ' ',
+				//$LastSponsor  =>  $LastSponsorName,
+					
+					$this->FirstName . ' ' . $this->LastName  => $this->FirstName . ' ' . $this->LastName ,
+					  $this->FirstName   => $this->FirstName  ,
+					  $this->LastName  =>  $this->LastName 
+
+					   
+				   ) // The dropdown map of values => display text. The values will be matched against the Author field.
+				);
+						
+						
+			$fields->addFieldToTab("Root.Main", $sponsorTablefield);
+
+	
+	
+			
+			   //-----------  Owner  -----------///
+			   
+			  $fields->removeByName('Owner');
+			   
+			
+				 
+			$fields->addFieldToTab("Root.Main",new HeaderField (
+ 					   $title = "Owner",
+    					$headingLevel = "3"
+			));
+				
+				
+				
+		 	$ownerTablefield = new  ManyManyDataObjectManager(
+				 $this,
+				 'Owner',
+				 'Owner',
+				 array(
+				'Name' => 'Name'
+				 ),'CMSFields_forPopup'
+			  );
+			
+				
+			$Cookie = new Cookie;
+		  	
+			if ($Cookie ->get('LastOwnerID')) {
+				
+				
+				$LastOwner =  $Cookie ->get('LastOwnerID');
+				$LastOwnerRecord = DataObject::get_by_id('Owner',$LastOwner);
+				
+				if ($LastOwnerRecord) {
+					$LastOwnerName =  $LastOwnerRecord->Name; 
+				} else {$LastOwnerName ='';} 
+				
+				} else {
+					$LastOwner = 0 ;
+					$LastOwnerName =   'no last owner found ';
+			 }; 
+			
+			
+		
+		  
+				$ownerTablefield->setFilter(
+				   'Name', // The field we're filtering
+				   'Filter by possible names', // The label for the filter field
+				   array(
+					
+					' '  =>  ' ',
+					$LastOwner  =>  $LastOwnerName,
+					$this->FirstName . ' ' . $this->LastName  => $this->FirstName . ' ' . $this->LastName ,
+					  $this->FirstName   => $this->FirstName  ,
+					  $this->LastName  =>  $this->LastName 
+					   
+				   ) // The dropdown map of values => display text. The values will be matched against the Author field.
+				);
+					
+					
+			$fields->addFieldToTab("Root.Main", $ownerTablefield);
+ 
+	
+
+		  //-----------  Left  -----------///
+
+		  $fields->removeByName('Time Left');
+
+			$fields->addFieldToTab("Root.Main", new NumericField(
+				   $name = 'TimeLeft',
+				   $title = "Date left",
+				   $value = ""
+			  ));
+			
+			
+		/* $fields->removeByName('NumberOfYearsDeparted');
+		
+			$fields->addFieldToTab("Root.Main", new NumericField(
+			   $name = 'NumberOfYearDeparted',
+				   $title = "Number of years departed",
+				   $value = ""
+			  ));*/ 
+			
+			
+			
+			
+		  //-----------  CERT of Freedom  -----------///
+		 $fields->removeByName('CertificateOfFreedom');
+
+		$fields->addFieldToTab("Root.Main", new CheckboxField(
+				   $name = "CertificateOfFreedom",
+				   $title = "Certificate Of Freedom"
+		  )); 
+		
+		
+		
+		
+				 
+		  //-----------  CERT of Freedom  Sedon  -----------///
+		 $fields->removeByName('CertificateOfFreedomMusgrave');
+
+		$fields->addFieldToTab("Root.Main", new CheckboxField(
+				   $name = "CertificateOfFreedomMusgrave",
+				   $title = "Certificate Of Freedom - Musgrave"
+		  )); 
+		
+		
+	
+	  //-----------  Born Free  -----------///
+
+	  $fields->removeByName('Born Free');
+	  $fields->addFieldToTab("Root.Main", new CheckboxField(
+				   $name = "BornFree",
+				   $title = "Born Free"
+	 )); 
+
+
+	 $fields->removeByName('Born Location');
+	 
+	 
+	 $locs= DataObject::get('Loc');
+	 $locs->sort("Name", "ASC");
+	 $map = $locs->toDropDownMap('ID', 'Name');
+	 $dropdownfield = new DropdownField("BornLocationID", "If they were born free", $map);
+	 $fields->addFieldToTab("Root.Main", $dropdownfield ); 
+
+
+		//-----------  Service / Group   -----------///
+		
+		 $fields->removeByName('Service');
+
+			$fields->addFieldToTab("Root.Main",new HeaderField (
+ 					   $title = "Service or Group this person was part of",
+    					$headingLevel = "3"
+			));
+					
+			
+			$serviceOneTablefield = new HasOneDataObjectManager(
+				 $this,
+				 'Service',
+				 'myGroups',
+				 array(
+				'Name' => 'Name'
+				 )
+			  );
+			
+		    $fields->addFieldToTab("Root.Main", $serviceOneTablefield);
+			
+			
+			
+			
+	 //-----------  Remakes   -----------///
+		
+			 $fields->removeByName('Remarks'); 
+
+			$fields->addFieldToTab("Root.Main",new HeaderField (
+ 					   $title = "Other remarks that don't fit into the above fields",
+    					$headingLevel = "3"
+			));
+					
+				 $fields->addFieldToTab("Root.Main", new TextField(
+				   $name = 'Remarks',
+				   $title = "Remarks",
+				   $value = ''
+				   
+			  ));
+				
+				
+		
+			//----- Source ----///
+			
+			 $fields->removeByName('Source File');
+			  $fields->removeByName('Source');
+			 
+			 	$fields->addFieldToTab("Root.Main",new HeaderField (
+ 					   $title = "------- Source ------- ",
+    					$headingLevel = "3"
+			));
+				
+			 
+			$Cookie = new Cookie;
+		
+			if ($Cookie ->get('SourceFileID'))	{
+					
+					$LastSource= $Cookie ->get('SourceFileID'); 
+					//$this->SourceFile =  $LastSource; 
+					
+			} else {$LastSource=0;};
+			
+			
+			 
+			 
+			 
+			 $myimage  = new FileIFrameField('SourceFile','Choose the source file'); 
+			
+			  //$myimage->value = $LastSource; 
+
+				// $myimage::setFolderName()  =  'bon'; 
+  			 
+			 $fields->addFieldToTab("Root.Main",  $myimage);
+			  
+			  		
+		 //-----------  Other notes and assumupatios    -----------///
+		
+			 $fields->removeByName('AssumedRanDate'); 
+			 $fields->removeByName('Narrative');
+
+			$fields->addFieldToTab("Root.Main",new HeaderField (
+ 					   $title = "------- Our assumptions and notes ------- ",
+    					$headingLevel = "3"
+			));
+				
+			 $fields->addFieldToTab("Root.Main", new NumericField(
+				   $name = 'AssumedRanDate',
+				   $title = "[Assumed date they left]",
+				   $value = ""
+			  ));
+					
+					
+				 $fields->addFieldToTab("Root.Main", new TextField(
+				   $name = 'Narrative',
+				   $title = '[Narrative]',
+				   $value = ''
+			  ));
+				
+				
+			
+
+				 
+				 
+			
+			
+											
+			 
+			 
+	
+			 
+			 
+					  
+
+
+
+			
+			  return $fields;
+   }
+   
+   
+
+	
+  
+	public function populateDefaults(){
+    	parent::populateDefaults();
+	
+			 $where = 'Name = "Evacuation of New York"';
+			
+			$ThisEvent = DataObject::get_one('Events', $where );
+		  //  Debug::show($ThisEvent);
+			
+		  	//Debug::show($ThisEvent->ID);
+		   $this->EventID = $ThisEvent->ID;
+	}
+			
+	
+
+
+ 
+};
+
+?>

@@ -1,0 +1,142 @@
+8
+
+dir
+2081
+http://simile-widgets.googlecode.com/svn/exhibit/trunk/src/webapp/api
+http://simile-widgets.googlecode.com/svn
+
+
+
+2010-02-18T23:20:06.124460Z
+2081
+ryanlee@csail.mit.edu
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+579c892a-5248-0410-a714-2bcf037eb5bf
+
+extensions
+dir
+
+compile-epilog.js
+file
+
+
+
+
+2010-03-09T00:29:15.000000Z
+fa625c8a62e5368ee296f88377bb0494
+2009-05-17T22:37:26.546957Z
+2024
+dfhuynh
+
+locales
+dir
+
+exhibit-bundle-debug.js
+file
+
+
+
+
+2010-03-09T00:29:15.000000Z
+2d3ce20a105e3710209ff24a3238b10d
+2009-08-30T05:28:41.941527Z
+2047
+dfhuynh
+
+styles
+dir
+
+compile-prolog.js
+file
+
+
+
+
+2010-03-09T00:29:15.000000Z
+a7a9365dd7733e45267a09a0dee7fbe9
+2009-05-17T22:37:26.546957Z
+2024
+dfhuynh
+
+images
+dir
+
+scripts
+dir
+
+exhibit-bundle.css
+file
+
+
+
+
+2010-03-09T00:29:15.000000Z
+6dce7f3d94698edbd74c7e682a15b9f0
+2009-06-29T18:22:34.086963Z
+2034
+dfhuynh
+has-props
+
+exhibit-api.js
+file
+
+
+
+
+2010-03-09T00:29:15.000000Z
+5fe1d04616c8934da040cc8f5c764de4
+2009-08-13T12:29:42.201426Z
+2043
+rmcqueen@mit.edu
+has-props
+
+manifest.json
+file
+
+
+
+
+2010-03-09T00:29:15.000000Z
+7c690f5404e3d9f097dd584d02b7f9d3
+2007-06-02T05:53:16.476874Z
+604
+oyasumi
+
+exhibit-bundle.js
+file
+
+
+
+
+2010-03-09T00:29:15.000000Z
+3c79277495896be5b2fe078ef9a45de7
+2009-12-08T03:45:53.614297Z
+2076
+ryanlee@csail.mit.edu
+has-props
+
+exhibit-bundle-debug.css
+file
+
+
+
+
+2010-03-09T00:29:15.000000Z
+013fa8d20f0ade58838ed010da7438db
+2009-05-17T22:37:26.546957Z
+2024
+dfhuynh
+

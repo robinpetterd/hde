@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/1904/exhibit/tags/2.2.0/src/webapp/api/scripts
+END
+persistence.js
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/1904/exhibit/tags/2.2.0/src/webapp/api/scripts/persistence.js
+END
+exhibit.js
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/1904/exhibit/tags/2.2.0/src/webapp/api/scripts/exhibit.js
+END
+authentication.js
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/!svn/ver/1904/exhibit/tags/2.2.0/src/webapp/api/scripts/authentication.js
+END
+create.js
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/1904/exhibit/tags/2.2.0/src/webapp/api/scripts/create.js
+END

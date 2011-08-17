@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml"  
+
+xmlns:fc="http://www.adobe.com/2006/fc"
+xmlns:flexlib="http://code.google.com/p/flexlib/"
+	xmlns:ns1="com.adobe.wheelerstreet.fig.panzoom.*" 	 
+
+
+	 creationComplete="setup()" addedToStage="setupVisual()" backgroundGradientColors="[0xFFFFFF, 0xFFFFFF]" horizontalScrollPolicy="off" verticalScrollPolicy="off">
+ <mx:Style> 
+		.black { background-color: #9933FF } 
+	</mx:Style>
+
+	<mx:Canvas  id="container" horizontalScrollPolicy="off" verticalScrollPolicy="off" width="100%" height="100%">
+		
+	<fc:Roamer  id="roamer" bottom="0"  horizontalScrollPolicy="off" verticalScrollPolicy="off"
+		itemRenderer="XMLItemView"
+		repulsionFactor="{repulsion.value}" 
+		maxDistanceFromCurrent="{maxDistanceFromCurrent.value}" 
+		itemLimit="{maxVisible.value}"
+		autoFit="false"
+		motionThreshold="{motionThreshold.value}"
+		change="if(infoText != null) infoText.text = roamer.fullNodeCount + ' items, ' + roamer.visibleNodeCount + ' visible.';" right="0" left="0" top="0">
+
+		<fc:removeItemEffect>
+			<mx:Fade alphaFrom="1" alphaTo="0" duration="1000"/>				
+		</fc:removeItemEffect>
+		
+		<fc:addItemEffect>
+			<mx:Fade alphaFrom="0" alphaTo="1" duration="1000"/>
+		</fc:addItemEffect>
+	</fc:Roamer>
+	
+		<mx:Text x="5" y="5" text="data loading" id="infoText" fontSize="9" />		
+		
+				<mx:VBox id="tabs" right="0" styleName="containerVBox" >
+						<flexlib:WindowShade label="Controls"  width="200" horizontalScrollPolicy="off" opened="false" backgroundColor="0xffffff">
+							
+						 <mx:CheckBox   label="Display Full Screen" id="fs" click="this.toggle()" />
+							
+							<mx:Label text="maximum number visible" fontSize="9" width="133" textAlign="center" />
+							<mx:HSlider  width="133" id="maxVisible" snapInterval="1" value="150" minimum="20" maximum="300" liveDragging="true"/>
+	
+	
+						<mx:Label  text="item spacing" fontSize="9" width="133" textAlign="center" color="#000000"/>
+						<mx:HSlider  id="repulsion" value=".18" minimum="0.01" maximum="1.5" liveDragging="true"/>
+							
+						<mx:Label  text="max degrees of separation" fontSize="9" textAlign="left" />
+					   <mx:HSlider  width="133" id="maxDistanceFromCurrent" value="5" minimum="1" maximum="10" 
+						liveDragging="true" snapInterval="1" height="25"/>
+		
+						<mx:Label visible="false"  text="motion stop threshold" fontSize="9" width="133" textAlign="center" />
+						<mx:HSlider visible="false"  width="133" id="motionThreshold" value="{roamer.motionThreshold}" minimum="0.01" maximum="2" liveDragging="true"/>
+	
+				</flexlib:WindowShade >
+				<flexlib:WindowShade label="Legend"  width="200" horizontalScrollPolicy="off" opened="true" backgroundColor="0xffffff">
+
+					<mx:DataGrid width="200" height="240" dataProvider="{relationshipXML}"  >
+						  <mx:columns>
+							 <mx:DataGridColumn dataField="@name" headerText="Name"/>
+							 <mx:DataGridColumn dataField="" headerText="" itemRenderer="LegendItemView"  />
+						  </mx:columns>
+					   </mx:DataGrid>
+					   
+   				</flexlib:WindowShade >
+
+				</mx:VBox>
+	   
+	<mx:CheckBox x="11" y="323" label="Show history" color="#dddddd" selected="true"
+		change="roamer.showHistory = event.currentTarget.selected" visible="false" />
+		
+
+	<mx:Text x="5" y="20" id="help" fontSize="9"  visible="true" /><!-- text="Click a button to load some data"  -->
+	
+  
+	</mx:Canvas>
+	
+	<mx:HTTPService id="defaultData" url="http://www.blackloyalist.info/assets/network.xml" showBusyCursor="true" resultFormat="e4x"
+	result="gotData(['node','edge','fromID','toID'], event)"/>
+	
+	<mx:HTTPService id="relationshipData" url="http://www.blackloyalist.info/network/relationshiptypes"  
+	result="relationshipHandler(event)" resultFormat="e4x" />
+	
+
+	
+	
+		
+	<mx:Script>
+		<![CDATA[
+			import com.adobe.flex.extras.controls.springgraph.SpringGraph;
+			import flash.geom.Point;
+			import flash.geom.Rectangle;
+			 
+			import flash.display.DisplayObject;
+
+			import flash.events.KeyboardEvent;
+			import mx.rpc.events.ResultEvent;
+			
+			import com.adobe.flex.extras.controls.springgraph.Item;
+			import com.adobe.flex.extras.controls.springgraph.Graph;
+			
+			import flash.display.*;
+			import mx.events.*;
+			
+			import utils.DefaultValues;
+			import utils.ImageResizer;	
+			
+				import mx.utils.ObjectUtil;
+
+				
+			public var currentPerson:String;
+			private var dataSource:String = null;
+
+						
+			private var keyState:String;
+			private var currentkeyCode:Number;
+ 
+			[Bindable] private var relationshipXML:XMLList;  
+			
+		public function setup(): void {
+			
+			dataSource =  mx.core.Application.application.parameters.dataSource;
+			currentPerson = mx.core.Application.application.parameters.currentPerson;
+			
+			//currentPerson = "2424"; // For debugging
+			///help.text = 	currentPerson;
+
+			trace('started up');
+			
+			defaultData.send();
+			
+			relationshipData.send();
+
+			if (dataSource == null ) { 
+				defaultData.send();
+			} else {
+				 //ExternalData.send();
+			}
+			//trace(currentPerson);
+			}
+			
+			public function setupVisual(): void {
+				
+				
+				this.stage.focus = this; 
+				//this.stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDown); 
+				//this.stage.addEventListener(KeyboardEvent.KEY_UP, onKeyUp); 
+			
+				//var ptScalePoint:Point = new Point(springgraph.x + springgraph.width/2, springgraph.y + springgraph.height/2);
+				//call the function and pass in the object to be rotated, the amount to scale X and Y (sx, sy), and the point object we created
+			//	scaleFromCenter(springgraph, multiplier  , multiplier , ptScalePoint);
+				
+			}
+			
+		private function relationshipHandler(evt:ResultEvent):void{
+			trace('------------------------------------------------------------');
+			relationshipXML = evt.result.type;
+			trace(evt.result.type);
+		}
+
+	
+		public function changePerson(which:String): void {
+				//trace(roamer.currentItem.id);
+				//help.text = "about to change the owner";
+				///roamer.currentItem = roamer.dataProvider.find(which);//This pick what is current node 
+				trace("changing the owner " + which);
+				
+				//var thenodes:Object= roamer.dataProvider.nodes;
+				
+				//trace(roamer.dataProvider.hasNode(which));
+				
+				var nextNode:Item = roamer.dataProvider.find(which); 
+				
+				//trace(ObjectUtil.toString(nextNode));
+				
+				roamer.currentItem = nextNode;
+				help.text = "Currently focused on " + roamer.currentItem.data.@name;
+
+				
+				
+			}
+			
+			
+	
+			
+		     private function toggle():void{
+			
+           if(fs.selected == true){
+                this.goFullScreen();
+            } else {
+                this.exitFullScreen();
+            }
+        }
+
+
+        private function goFullScreen():void {
+               stage.displayState = StageDisplayState.FULL_SCREEN;
+        }
+        private function exitFullScreen():void {
+               stage.displayState = StageDisplayState.NORMAL;
+        }
+
+        
+		private function gotData(xmlNames: Array, event: ResultEvent): void {
+
+				roamer.xmlNames = xmlNames;
+				roamer.dataProvider = event.result as XML;
+				
+				//help.text = currentPerson;
+				trace("about to change the focus");
+				changePerson(currentPerson);
+				
+				//help.text = roamer.currentItem.id;
+
+						
+				
+			}
+		
+			 public function itemDoubleClick(event: Event): void {
+                roamer.currentItem = event.currentTarget.data;
+				help.text = "Currently focused on " + roamer.currentItem.data.@name;
+				trace(roamer.currentItem.id);
+				//trace(event.currentTarget.data);
+				//changeHelp2();
+            }
+			
+
+			private function changeHelp2(): void {
+			//	help.text = "Choose another data source, or try the other springgraph controls";
+				var t:Timer = new Timer(10000, 1);
+	          	t.addEventListener(TimerEvent.TIMER_COMPLETE, onTimerComplete);
+             	t.start(); 	
+        	}
+
+	        public function onTimerComplete(evt:TimerEvent):void
+	        {
+	            help.visible = false;
+	        }
+		]]>
+	</mx:Script>
+</mx:Application>

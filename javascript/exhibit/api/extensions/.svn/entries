@@ -1,0 +1,52 @@
+8
+
+dir
+2081
+http://simile-widgets.googlecode.com/svn/exhibit/tags/2.2.0/src/webapp/api/extensions
+http://simile-widgets.googlecode.com/svn
+
+
+
+2009-03-10T05:25:27.690175Z
+1895
+dfhuynh
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+579c892a-5248-0410-a714-2bcf037eb5bf
+
+chart
+dir
+
+editing
+dir
+
+curate
+dir
+
+calendar
+dir
+
+freebase
+dir
+
+map
+dir
+
+timeplot
+dir
+
+time
+dir
+

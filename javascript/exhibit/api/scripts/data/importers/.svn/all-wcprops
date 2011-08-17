@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/1904/exhibit/tags/2.2.0/src/webapp/api/scripts/data/importers
+END
+html-table-importer.js
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/!svn/ver/1904/exhibit/tags/2.2.0/src/webapp/api/scripts/data/importers/html-table-importer.js
+END
+jsonp-importer.js
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/!svn/ver/1904/exhibit/tags/2.2.0/src/webapp/api/scripts/data/importers/jsonp-importer.js
+END
+rdfa-importer.js
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/!svn/ver/1904/exhibit/tags/2.2.0/src/webapp/api/scripts/data/importers/rdfa-importer.js
+END
+babel-based-importer.js
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/!svn/ver/1904/exhibit/tags/2.2.0/src/webapp/api/scripts/data/importers/babel-based-importer.js
+END
+authenticated-importer.js
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/!svn/ver/1904/exhibit/tags/2.2.0/src/webapp/api/scripts/data/importers/authenticated-importer.js
+END
+exhibit-json-importer.js
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/!svn/ver/1904/exhibit/tags/2.2.0/src/webapp/api/scripts/data/importers/exhibit-json-importer.js
+END

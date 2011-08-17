@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/1904/exhibit/tags/2.2.0/src/webapp/api/scripts/ui/coders
+END
+size-coder.js
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/!svn/ver/1904/exhibit/tags/2.2.0/src/webapp/api/scripts/ui/coders/size-coder.js
+END
+color-coder.js
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/!svn/ver/1904/exhibit/tags/2.2.0/src/webapp/api/scripts/ui/coders/color-coder.js
+END
+default-color-coder.js
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/!svn/ver/1904/exhibit/tags/2.2.0/src/webapp/api/scripts/ui/coders/default-color-coder.js
+END
+size-gradient-coder.js
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/!svn/ver/1904/exhibit/tags/2.2.0/src/webapp/api/scripts/ui/coders/size-gradient-coder.js
+END
+icon-coder.js
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/!svn/ver/1904/exhibit/tags/2.2.0/src/webapp/api/scripts/ui/coders/icon-coder.js
+END
+color-gradient-coder.js
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/!svn/ver/1904/exhibit/tags/2.2.0/src/webapp/api/scripts/ui/coders/color-gradient-coder.js
+END

@@ -1,0 +1,416 @@
+<?php
+
+class PersonDisplayPage extends Page {
+
+
+}
+
+class  PersonDisplayPage_Controller extends Page_Controller {
+
+	function init() {
+              parent::init();
+			   Requirements::javascript('hde/javascript/swfobject.js');
+          }
+		
+	function toJSON() {
+		
+					   
+			$params = Director::urlParams();
+			 $id = (int)$params['ID'];
+		
+			if ($id == null){
+				Director::redirect('error/');
+			};
+				
+			//-- old Silverstrip  stuff--//		
+			/*$person = DataObject::get_by_id('Person',$id); 
+		
+			$f = new JSONDataFormatter();
+			$f->relationDepth = 2;
+			$json = $f->convertDataObject($person);
+			return $json; */
+			
+			$PersonEventObjects = DataObject::get("EventData",
+												"KnownAsID = '$id'",
+												"Events.YEAR ASC",
+												"LEFT JOIN Events ON Events.ID = EventData.EventID");
+			
+			//header("Content-type: application/json");	
+
+			return $this->customise(
+			array('EventData' => $PersonEventObjects))
+			->renderWith('PersonJson');
+				  
+				  
+
+	}
+	
+	function buildDynamicRanEvents($PersonEventObjects) {
+		
+		//$DynamicEventObjects = DataObject::get("Events","RuleBased = 1 ");
+		
+			$BONData = $PersonEventObjects->find('ClassName', 'BONData');
+			$ranYear =  1783 - $BONData->TimeLeft;
+			
+		  // Debug::Show($ranYear);
+
+		    $DynamicEventObjects = DataObject::get("Events","RuleBased = 1 AND RuleRanStart <= $ranYear AND RuleRanEnd >= $ranYear");
+		
+			return  $DynamicEventObjects;
+			
+		
+	}	
+	/* Builds a dynamic event that is show the birth date of a run away*/	
+		
+	function buildBirth($PersonEventObjects) {
+		
+			//Debug::show($PersonEventObjects);
+			$BONData = $PersonEventObjects->find('ClassName', 'BONData');
+			//Debug::show($BONData->Age);
+			$bornYear =  1783 - $BONData->Age; 
+		//	Debug::show($bornYear);
+			
+			/* old stuff for when the birth data was being made on the run $myBirthEvent = new Events();	
+			$myBirthEvent->Name = "Born";
+			$myBirthEvent->Year =  $bornYear;
+			$myBirthEvent->ID =  10000;
+			//Debug::show($myBirthEvent); */
+
+			//Now link that to EventData 
+		
+			$BornEvent = DataObject::get_one("Events","Name = 'Born'" ); 
+			
+			$BornEvent->Year = $bornYear;
+			
+  			//Debug::Show($BornEvent);
+
+			//$BornEvent->write();
+			
+			$myBirthDataSet = new DataObjectSet();
+			
+			$myBirthDataEvent = new CustomEvent();
+			
+			$myBirthDataEvent->EventID = $BornEvent->ID;
+
+			
+			//Debug::show($myBirthDataEvent);
+			$myBirthDataSet->push($myBirthDataEvent);
+			return $myBirthDataSet;
+
+			
+			
+		}
+	
+
+function buildRan($PersonEventObjects) {
+		
+			//Debug::show($PersonEventObjects);
+			$BONData = $PersonEventObjects->find('ClassName', 'BONData');
+			//Debug::show($BONData->Age);
+			
+			$ranYear =  1783 - $BONData->TimeLeft;
+
+			$BornRan = DataObject::get_one("Events","Name = 'Ran'" ); 
+			$BornRan->Year = $ranYear;   
+			
+			//Debug::Show($BornRan);
+						
+			$myRanDataSet = new DataObjectSet();
+			
+			$myRanDataEvent = new CustomEvent();
+			
+			$myRanDataEvent->EventID = $BornRan->ID;
+				//Debug::show($myBirthDataEvent);
+			$myRanDataSet->push($myRanDataEvent );
+			return $myRanDataSet ;			
+		}
+		
+   function display() {
+	   
+	   
+      $params = Director::urlParams();
+      $id = (int)$params['ID'];
+
+	 if ($id == null){
+		Director::redirect('error/');
+		}//
+
+	 //Need to do this all the data objects where we might find the person.  
+	  
+	
+	$person = DataObject::get_by_id('Person',$id); 
+	//Debug::show($person);
+
+    if($person == null) Director::redirect('error/');
+
+
+	$this->Title = $person->Name;//Make the person name show up in the title
+				$eventObjects = new DataObjectSet(); 
+
+	  
+	
+				//Only do this stuff if user is logged.  
+					
+		//	Debug::show();
+	  		$personVisual =  $person->VisualID;
+			$currentVisual = DataObject::get_by_id('Visual',$personVisual); 
+			
+			
+			
+			//----------SEARCH THRU ALL THE BITS OF DATA this is bit messy for the white people  ----------- it would be good this was more elegeant
+			
+			// --- these just get one entry so that in the templates Getter that list all the owners/sponsors can actually be made
+		
+			
+	       if ($currentVisual->Name == "White" ) {
+
+					
+						
+						$RawTithablesObjects = DataObject::get("TithablesData",
+										"OwnerID = {$id}",
+										"Events.YEAR ASC",
+										"LEFT JOIN Events ON Events.ID = EventData.EventID",
+										"");
+						
+						
+						$foundTithalbeEvents = array();
+						//$foundTithalbeEvents->push(0);
+						$TithablesObjects = new DataObjectSet();
+
+
+
+						if($RawTithablesObjects) {	
+					
+							 foreach ($RawTithablesObjects as $Tithables) {
+								 			
+											
+									   //Debug::show($Tithables);
+									  // Debug::show(in_array( $Tithables->EventID,	$foundTithalbeEvents)); 
+										
+									 	$found =  in_array($Tithables->EventID,$foundTithalbeEvents); 
+
+											if($found == 1 ) {
+												
+												//Debug::show("This event has happend before");
+											
+											} else {
+											
+												//Debug::show("This event hasn't happend before");
+
+												$TithablesObjects->push($Tithables);
+ 												array_push($foundTithalbeEvents,$Tithables->EventID);						
+											}
+							 				
+										
+							 }
+						}
+			 
+						
+						$eventObjects->merge($TithablesObjects); 
+						
+						
+						
+						
+						
+						$BONData = DataObject::get(
+							"BONData",
+							 "BONData_Owner.OwnerID = {$id}",
+							 "Events.YEAR ASC",
+							 "LEFT JOIN BONData_Owner ON BONData.ID = BONData_Owner.BONDataID 
+							  LEFT JOIN Events ON Events.ID = EventData.EventID ",
+							 "1"
+							 );
+						
+						$eventObjects->merge($BONData); 
+						
+						$BONSponsor = DataObject::get("BONData", 
+							"BONData_Sponsor.PersonID = {$id}",
+							"Events.YEAR ASC",
+							 "LEFT JOIN BONData_Sponsor ON BONData.ID = BONData_Sponsor.BONDataID
+							  LEFT JOIN Events ON Events.ID = EventData.EventID",
+							  "1"
+
+							 );
+						
+						$eventObjects->merge($BONSponsor); 
+					
+						//$BirchtownMusterObjects = DataObject::get("BirchtownMusterData","OwnerID = {$id}");
+						
+						$BirchtownMusterObjects = DataObject::get(
+								"BirchtownMusterData",
+								"BirchtownMusterData_Owner.OwnerID = {$id}",
+								"Events.YEAR ASC",
+								"LEFT JOIN BirchtownMusterData_Owner ON BirchtownMusterData.ID = BirchtownMusterData_Owner.BirchtownMusterDataID
+								 LEFT JOIN Events ON Events.ID = EventData.EventID ",
+								 "1"
+							 );
+									
+						$eventObjects->merge($BirchtownMusterObjects); 
+			
+			
+		   }
+		   
+		  $PersonEventObjects = new  DataObjectSet();
+		//just the stanard searches   
+		  $PersonEventObjects = DataObject::get("EventData",
+												"KnownAsID = '$id'",
+												"Events.YEAR ASC",
+												"LEFT JOIN Events ON Events.ID = EventData.EventID");
+		//Debug::Show($PersonEventObjects);
+			//Debug::Show($currentVisual->Name);
+
+		//Now we need build the birthdate but we only do that for the run aways	
+		 if (($currentVisual->Name == "Black") || ($currentVisual->Name == "Mulatto")  ) {
+		 	
+			$birthEvent = $this->buildBirth($PersonEventObjects);
+			Debug::Show($birthEvent);
+			$eventObjects->merge($birthEvent);
+			
+			 }
+		
+		//really need try and merge the data objects together 
+	
+	
+				
+			
+		//Now we need build the ran data but we only do that for the run aways	
+		 if (($currentVisual->Name == "Black") || ($currentVisual->Name == "Mulatto")  ) {
+
+			$ranEvent = $this->buildRan($PersonEventObjects);
+		//	Debug::Show($ranEvent);
+			$eventObjects->merge($ranEvent);
+			
+			 }
+		
+		
+			$eventObjects->merge($PersonEventObjects);  //got them together 
+			//Debug::Show($eventObjects);
+				
+
+		//$eventObjects->merge($ownerObjects);
+		
+	  $ClaimsEventObjects = new  DataObjectSet();
+		//just the stanard searches   
+		  $ClaimsEventObjects = DataObject::get("LoyalistClaims",
+												"LoyalistClaims_RunAways.PersonID = '$id'",
+												"",
+												"LEFT JOIN LoyalistClaims_RunAways ON LoyalistClaims.ID =  LoyalistClaims_RunAways.LoyalistClaimsID");
+		//really need try and merge the data objects together 
+		
+
+
+		$eventObjects->merge($ClaimsEventObjects);  //got them together 
+		//$eventObjects->merge($ownerObjects);
+		//$eventObjects->sort('EventID.Year', 'DESC'); /// BUG when we add this it all stops working.
+
+
+		//Debug::show($relationshipsObjects);
+
+	  //Now send this back the browser. 
+	  
+	  //Now we get the other dynamic events 
+	  
+	  //Get the ones for that are for everyone
+	  
+	  	$DynamicEventObjectSet = new DataObjectSet();
+			
+			//Debug::show($myBirthDataEvent);
+			
+		//This is the event for everyone,  	
+	   $DynamicEventObjects = DataObject::get("Events","RuleBased = 1 AND RuleIsEveryone = 1 ");
+	  // Debug::Show($DynamicEventObjects); 
+	  
+	  
+	  if($DynamicEventObjects) {
+	  	 foreach($DynamicEventObjects as $Event) {
+	  	 	$dynamicEvent = new CustomEvent();
+			$dynamicEvent->EventID = $Event->ID;
+			$eventObjects->push($dynamicEvent);
+	
+	  	 	//Debug::Show($Event);
+	  	 }
+		// $eventObjects->merge($DynamicEventObjects);
+	  }
+	  
+	  // Now we start in the   
+	  
+	  	$RanEvents = $this->buildDynamicRanEvents($PersonEventObjects);
+			  if($RanEvents) {
+				 foreach($RanEvents as $Event) {
+				  	$dynamicEvent = new CustomEvent();
+					$dynamicEvent->EventID = $Event->ID;
+					$eventObjects->push($dynamicEvent);
+				 }
+			  }
+
+			foreach($eventObjects as $EventData) {
+				  Debug::Show($EventData->Year);
+				 }
+
+		//Debug::Show($eventObjects);			
+	
+		$eventObjects->sort('Year');//ascending
+	
+	
+	if(Permission::check(0)){//Check to see if view is login 
+ 
+	   if ($person->ClassName == "Owner" ) {
+		   	   // Debug::show($eventObjects);
+
+			return $this 
+					  ->customise(array('Person' => $person, 'EventData' => $eventObjects, 'TithablesData' => $TithablesObjects))
+					  ->renderWith(array('OwnerDisplayPage', 'Page'));
+	   } else {
+		   	
+			  //Debug::show($eventObjects);
+
+				return $this 
+				  ->customise(array('Person' => $person,'EventData' => $eventObjects))
+				  ->renderWith(array('PersonDisplayPage', 'Page'));				  
+	   }
+	 
+   	} else {
+      //This is what happen if the user is not logged in   
+	  //Debug::show("Not logged"'
+					
+		$CurrentStatus = $person->Status();// Get the status  
+			
+			//Debug::show($CurrentStatus);
+			
+			  if($CurrentStatus->Name == 'Publish') 
+				{
+			
+			//Debug::show("Show  it the world");
+					 
+					  if ($person->ClassName == "Owner" ) {
+					return $this 
+							  ->customise(array('Person' => $person,'EventData' => $eventObjects))
+							  ->renderWith(array('OwnerDisplayPage', 'Page'));
+			   } else {
+						return $this 
+						  ->customise(array('Person' => $person,'EventData' => $eventObjects))
+						  ->renderWith(array('PersonDisplayPage', 'Page'));				  
+			   }
+					
+				} else  {
+			
+				Director::redirect('error/');
+
+				}
+				  
+      };
+
+	
+	 
+  
+	  
+	  
+   }
+   
+  
+ 
+
+}
+
+
+?>

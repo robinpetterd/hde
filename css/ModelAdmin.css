@@ -1,0 +1,21 @@
+
+
+body.ModelAdmin #left  div.Actions  input[title="Search"]   {
+	background-image:none;
+	background-color:#FC0;
+	font-weight:bold; 
+
+}
+
+
+
+body.ModelAdmin #left  #Form_CreateForm_action_add   {
+	background-image:none;
+	background-color:#3C0;
+	color:#FFF; 
+	font-weight:bold; 
+
+}
+
+
+

@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/repository/!svn/ver/9158/exhibit/branches/2.0
+END
+LICENSE.txt
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/repository/!svn/ver/8887/exhibit/branches/2.0/LICENSE.txt
+END
+.project
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/repository/!svn/ver/8887/exhibit/branches/2.0/.project
+END
+run
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/repository/!svn/ver/8887/exhibit/branches/2.0/run
+END
+run.bat
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/repository/!svn/ver/8887/exhibit/branches/2.0/run.bat
+END
+README.txt
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/repository/!svn/ver/8887/exhibit/branches/2.0/README.txt
+END
+build.xml
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/repository/!svn/ver/8887/exhibit/branches/2.0/build.xml
+END
+jetty.xml
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/repository/!svn/ver/8887/exhibit/branches/2.0/jetty.xml
+END

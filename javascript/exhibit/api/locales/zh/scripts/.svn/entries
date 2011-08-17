@@ -1,0 +1,49 @@
+8
+
+dir
+2081
+http://simile-widgets.googlecode.com/svn/exhibit/tags/2.2.0/src/webapp/api/locales/zh/scripts
+http://simile-widgets.googlecode.com/svn
+
+
+
+2007-11-21T21:08:52.428045Z
+1219
+dfhuynh
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+579c892a-5248-0410-a714-2bcf037eb5bf
+
+exhibit-l10n.js
+file
+
+
+
+
+2010-03-15T03:47:10.000000Z
+68371da972d00f7ff8990e8d83ec72c4
+2007-08-10T15:24:22.878402Z
+1019
+dfhuynh
+
+data
+dir
+
+ui
+dir
+
+util
+dir
+

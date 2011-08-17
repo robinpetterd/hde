@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/!svn/ver/1904/exhibit/tags/2.2.0/src/webapp/api/extensions/freebase/scripts
+END
+metaweb.js
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/!svn/ver/1904/exhibit/tags/2.2.0/src/webapp/api/extensions/freebase/scripts/metaweb.js
+END
+freebase-importer.js
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/!svn/ver/1904/exhibit/tags/2.2.0/src/webapp/api/extensions/freebase/scripts/freebase-importer.js
+END

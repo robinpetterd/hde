@@ -1,0 +1,11 @@
+K 13
+svn:externals
+V 50
+lib http://simile.mit.edu/repository/tools/jetty/
+
+K 10
+svn:ignore
+V 5
+logs
+
+END

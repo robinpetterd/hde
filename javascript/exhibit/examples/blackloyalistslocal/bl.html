@@ -1,0 +1,294 @@
+<html>
+  <head>
+    <title>SIMILE Widgets | Exhibit | Examples | MIT Nobel Prize Winners</title>
+    <link rel='stylesheet' href='http://www.simile-widgets.org/styles/common.css' type='text/css' />
+
+
+    <!-- Replace the URL here with http://api.simile-widgets.org/exhibit/2.2.0/exhibit-api.js -->
+    <script src="../../api/exhibit-api.js?autoCreate=false" ></script>
+    
+    <!-- Replace the URL here with http://api.simile-widgets.org/exhibit/2.2.0/extensions/time/time-extension.js -->
+    <script src="../../api/extensions/time/time-extension.js" type="text/javascript"></script>
+    
+       
+  </head> 
+  <body>
+
+
+<script type="text/javascript"> var myData = 
+
+		{
+    "items" : [
+    
+    	
+            {   type :          "Event",
+                label :         "Lord Dunmore's Proclamation",
+                ID :         "151",
+
+                
+                year :			 "1775",                     
+                day:			"7",
+                month:			"11",
+                information:	" <a href='event/display/151'>More Information</a>",
+                SourceFileId:	"177",
+                       
+                Location:		"Norfolk",
+                LatLng:        "36.842,-76.2956",
+                      
+               Source: 
+                    
+                       
+                       "Source for this event: Lord Dunmore's Proclamation"
+                       
+                  
+               
+            
+           },
+            
+          
+            {   type :          "Event",
+                label :         "Small Pox outbreak ",
+                ID :         "146",
+
+                
+                year :			 "1776",                     
+                day:			"0",
+                month:			"0",
+                information:	" <a href='event/display/146'>More Information</a>",
+                SourceFileId:	"0",
+                       
+                Location:		"Gwyn's Island",
+                LatLng:        "37.5024,-76.2897",
+                      
+               Source: 
+                    
+                       
+                       ""
+                       
+                  
+               
+            
+           },
+            
+          
+            {   type :          "Event",
+                label :         "British Invasion of Philadelphia",
+                ID :         "148",
+
+                
+                year :			 "1777",                     
+                day:			"0",
+                month:			"9",
+                information:	" <a href='event/display/148'>More Information</a>",
+                SourceFileId:	"0",
+                       
+                Location:		"Philadelphia",
+                LatLng:        ",",
+                      
+               Source: 
+                    
+                       
+                       ""
+                       
+                  
+               
+            
+           },
+            
+          
+            {   type :          "Event",
+                label :         "The Burning of Portsmouth",
+                ID :         "147",
+
+                
+                year :			 "1779",                     
+                day:			"0",
+                month:			"5",
+                information:	" <a href='event/display/147'>More Information</a>",
+                SourceFileId:	"0",
+                       
+                Location:		"Portsmouth",
+                LatLng:        "36.129,-77.2119",
+                      
+               Source: 
+                    
+                       
+                       ""
+                       
+                  
+               
+            
+           },
+            
+          
+            {   type :          "Event",
+                label :         "Siege of Yorktown",
+                ID :         "149",
+
+                
+                year :			 "1781",                     
+                day:			"0",
+                month:			"0",
+                information:	" <a href='event/display/149'>More Information</a>",
+                SourceFileId:	"0",
+                       
+                Location:		"YorkTown",
+                LatLng:        "37.2344,-76.5097",
+                      
+               Source: 
+                    
+                       
+                       ""
+                       
+                  
+               
+            
+           },
+            
+          
+            {   type :          "Event",
+                label :         "Treaty of Paris",
+                ID :         "150",
+
+                
+                year :			 "1782",                     
+                day:			"0",
+                month:			"0",
+                information:	" <a href='event/display/150'>More Information</a>",
+                SourceFileId:	"175",
+                       
+                Location:		"Norfolk",
+                LatLng:        "36.842,-76.2956",
+                      
+               Source: 
+                    
+                       
+                       "Source for this event: Treaty of Paris"
+                       
+                  
+               
+            
+           },
+            
+          
+            {   type :          "Event",
+                label :         "Evacuation of New York",
+                ID :         "9",
+
+                
+                year :			 "1783",                     
+                day:			"0",
+                month:			"0",
+                information:	" <a href='event/display/9'>More Information</a>",
+                SourceFileId:	"0",
+                       
+                Location:		"New York",
+                LatLng:        "40.7561,-73.9869",
+                      
+               Source: 
+                    
+                       
+                       "Source for this event: The Book of Negroes"
+                       
+                  
+               
+            
+           },
+            
+          
+            {   type :          "Event",
+                label :         "Birchtown Muster",
+                ID :         "8",
+
+                
+                year :			 "1784",                     
+                day:			"0",
+                month:			"0",
+                information:	" <a href='event/display/8'>More Information</a>",
+                SourceFileId:	"0",
+                       
+                Location:		"Birchtown",
+                LatLng:        "43.7449,-65.3797",
+                      
+               Source: 
+                    
+                       
+                       "Source for this event: Birchtown Muster  of Free Blacks  "
+                       
+                  
+               
+          
+           } 
+             
+          
+
+       
+
+    
+    ]
+}
+
+
+     
+
+
+
+
+</script> 
+
+   <script type="text/javascript"> 
+  			window.database = Exhibit.Database.create();
+            window.database.loadData(myData);
+            window.exhibit = Exhibit.create();
+            window.exhibit.configureFromDOM();
+            
+	
+</script> 
+
+    
+    <div id="main-content">
+      
+            <div ex:role="viewPanel" style="padding: 1em 0.5in;">
+        
+<div ex:role="view"
+                   ex:viewClass="Timeline"
+                   ex:start=".year"
+                   ex:showHeader="false"
+                   ex:showFooter="false"
+                   ex:timelineHeight="220"
+                   
+                   ex:topBandUnit="year"
+                   ex:topBandPixelsPerUnit="40"
+
+				   ex:bottomBandUnit="decade"
+                   ex:bottomBandPixelsPerUnit ="100"
+                   
+                   ex:bubbleWidth="600"
+    			   ex:bubbleHeight="300"
+                  
+                   ex:iconCoder="service-icons" 
+                   ex:iconKey=".type"
+                                         
+                                         
+                 >
+               </div>
+
+                                  
+                    
+                <div ex:role="lens" ex:itemTypes="Event" style="display:none;"> 
+                   
+                  <div class="EventTitle"> <h4 style=color:#8a0c0c;"><span ex:content=".year" class="year" ></span> - 
+                   <a href="event/display/50"><span  ex:content=".label" class="label"></span></a>
+                   
+                  </h4></div>
+                   
+                   <p><span ex:content=".information" style="font-size:.85em;"></span></p>
+
+                   <span ex:content=".Source" style="font-size:.75em;"></span>
+
+               </div>
+                           
+        </div>
+    </div>
+  </body>
+</html>

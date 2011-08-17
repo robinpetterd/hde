@@ -1,0 +1,8 @@
+@charset "UTF-8";
+/* CSS Document */
+
+.yui-carousel-element li { 
+	    height: 100px; 
+} 
+
+.yui-carousel-nav form {display:none}

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+	     attribute of the XML item in a colored box. -->
+
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" 	verticalGap ="-5" >
+	
+	
+
+			 
+	<mx:Image source="{data.data.@image}" width="35" height="35"  />
+  
+  
+	<mx:Script>
+		<![CDATA[
+			
+			 import mx.controls.ToolTip;
+             import mx.managers.ToolTipManager;
+			 import mx.styles.StyleManager;
+			 
+			import mx.effects.Glow;
+			import com.adobe.flex.extras.controls.springgraph.Graph;
+			import com.adobe.flex.extras.controls.springgraph.Item;
+			import mx.core.Application;
+			
+			
+
+		]]>
+	</mx:Script>				
+</mx:VBox>
+				

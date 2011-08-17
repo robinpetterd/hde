@@ -1,0 +1,73 @@
+8
+
+dir
+2081
+http://simile-widgets.googlecode.com/svn/exhibit/tags/2.2.0/src/webapp/api/extensions/timeplot
+http://simile-widgets.googlecode.com/svn
+
+
+
+2009-03-09T01:19:48.058524Z
+1873
+dfhuynh
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+579c892a-5248-0410-a714-2bcf037eb5bf
+
+locales
+dir
+
+timeplot-extension.js
+file
+
+
+
+
+2010-03-15T03:47:08.000000Z
+b5b20b0c20ad503cd20d30ff24fe24e1
+2009-03-09T01:19:48.058524Z
+1873
+dfhuynh
+
+styles
+dir
+
+timeplot-extension-bundle.css
+file
+
+
+
+
+2010-03-15T03:47:08.000000Z
+d41d8cd98f00b204e9800998ecf8427e
+2009-03-09T01:19:48.058524Z
+1873
+dfhuynh
+
+scripts
+dir
+
+timeplot-extension-bundle.js
+file
+
+
+
+
+2010-03-15T03:47:08.000000Z
+a149b30476116e2c6f267500cfd8b87b
+2009-03-09T01:19:48.058524Z
+1873
+dfhuynh
+

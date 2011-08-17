@@ -1,0 +1,41 @@
+8
+
+dir
+2081
+http://simile-widgets.googlecode.com/svn/exhibit/tags/2.2.0/src/webapp/api/extensions/chart/locales/fr
+http://simile-widgets.googlecode.com/svn
+
+
+
+2007-10-01T21:59:22.903537Z
+1155
+dfhuynh
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+579c892a-5248-0410-a714-2bcf037eb5bf
+
+chart-locale.js
+file
+
+
+
+
+2010-03-15T03:47:04.000000Z
+f69a0a779a40bbc007fe05d9a44c0ced
+2007-10-01T21:59:22.903537Z
+1155
+dfhuynh
+has-props
+

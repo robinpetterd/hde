@@ -1,0 +1,70 @@
+8
+
+dir
+2081
+http://simile-widgets.googlecode.com/svn/exhibit/tags/2.2.0/src/webapp/api/extensions/calendar
+http://simile-widgets.googlecode.com/svn
+
+
+
+2009-03-09T00:15:28.609171Z
+1867
+dfhuynh
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+579c892a-5248-0410-a714-2bcf037eb5bf
+
+calendar-extension-bundle.css
+file
+
+
+
+
+2010-03-15T03:47:06.000000Z
+efc07bafe4d3665a4d821f99d3a77d70
+2008-12-03T22:19:08.524229Z
+1696
+joshhuckabee
+
+styles
+dir
+
+calendar-extension-bundle.js
+file
+
+
+
+
+2010-03-15T03:47:06.000000Z
+dbbf264c65f0927359db09af4f294130
+2008-12-03T22:19:08.524229Z
+1696
+joshhuckabee
+
+scripts
+dir
+
+calendar-extension.js
+file
+
+
+
+
+2010-03-15T03:47:06.000000Z
+7cc138113471841cd7a1358378bfc568
+2009-03-09T00:15:28.609171Z
+1867
+dfhuynh
+

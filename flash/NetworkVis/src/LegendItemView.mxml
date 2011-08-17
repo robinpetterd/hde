@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas 
+    xmlns:mx="http://www.adobe.com/2006/mxml" 
+    xmlns:mycontrols="legend.*" >
+	
+	<!--  <mx:HRule width="100%"  strokeWidth="{data.@thickness}" strokeColor="{data.@color}" alpha="{data.@alpha}" />-->  
+    <mycontrols:LegendItemView  thickness="{data.@thickness}" color="{data.@color}" myalpha="{data.@alpha}"  />
+
+  
+	<mx:Script>
+		<![CDATA[
+		
+		]]>
+	</mx:Script>
+	</mx:Canvas>

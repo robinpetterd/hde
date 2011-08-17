@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/!svn/ver/1904/exhibit/tags/2.2.0/src/webapp/api/extensions/curate/scripts
+END
+curate-view.js
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/!svn/ver/1904/exhibit/tags/2.2.0/src/webapp/api/extensions/curate/scripts/curate-view.js
+END
+item-creator.js
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/!svn/ver/1904/exhibit/tags/2.2.0/src/webapp/api/extensions/curate/scripts/item-creator.js
+END
+change-list.js
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/!svn/ver/1904/exhibit/tags/2.2.0/src/webapp/api/extensions/curate/scripts/change-list.js
+END
+scraper.js
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/!svn/ver/1904/exhibit/tags/2.2.0/src/webapp/api/extensions/curate/scripts/scraper.js
+END
+submission-widgets.js
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/!svn/ver/1904/exhibit/tags/2.2.0/src/webapp/api/extensions/curate/scripts/submission-widgets.js
+END
+submission-backend.js
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/!svn/ver/1904/exhibit/tags/2.2.0/src/webapp/api/extensions/curate/scripts/submission-backend.js
+END

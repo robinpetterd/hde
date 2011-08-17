@@ -1,0 +1,67 @@
+8
+
+dir
+2081
+http://simile-widgets.googlecode.com/svn/exhibit/tags/2.2.0/src/webapp/api/locales/de
+http://simile-widgets.googlecode.com/svn
+
+
+
+2008-11-17T00:05:23.150138Z
+1687
+dfhuynh
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+579c892a-5248-0410-a714-2bcf037eb5bf
+
+exhibit-de-bundle.js
+file
+
+
+
+
+2010-03-15T03:47:15.000000Z
+98a13cd0a085b174baf547693ffba951
+2008-06-21T11:41:11.289313Z
+1413
+sbostler
+
+exhibit-nl-bundle.js
+file
+
+
+
+
+2010-03-15T03:47:15.000000Z
+83ffb4101b61b4cf4d1a918536f35ab7
+2008-11-17T00:05:23.150138Z
+1687
+dfhuynh
+
+scripts
+dir
+
+locale.js
+file
+
+
+
+
+2010-03-15T03:47:15.000000Z
+418731d98af6a131e9c4b108b140acf3
+2008-02-21T16:13:33.005057Z
+1262
+dfhuynh
+
