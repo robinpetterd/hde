@@ -1,4 +1,4 @@
-## Overview
+## Overview ##
 
 
 ## Installation ##
@@ -9,12 +9,11 @@
 Silverstripe 2.4
 DataObject Manager
 
-Suitable theme
+Suitable theme eg - https://github.com/sproutlabs/theme-blackloyalist
 
 ## Links ##
 
-http://www.blackloyalist.info
-
+http://www.blackloyalist.info this was the first site was used on
 
 ## License ##
 
