@@ -15,6 +15,17 @@ Suitable theme eg - https://github.com/sproutlabs/theme-blackloyalist
 
 http://www.blackloyalist.info this was the first site was used on
 
+## Setup ##
+
+At the moment some of the database objects need to be populated by hand. This includes 
+
+* Gender 
+* Workflow - I think there needs to be object called  Publish 
+* Role 
+* RelationshipsTypes 
+
+After you have done your installation maybe start.sql might give these. 
+
 ## License ##
 
 
