@@ -94,10 +94,7 @@
 
                  <span class="" >
                  <% if Age %> $Age <% end_if %>
-                  <% control BON %>
-                        <% if Description %>, $Description<% end_if %>  
-        
-                  <% end_control %>
+             
                                   <% if CurrentMember %><strong>PERSON ID = $ID</strong><% end_if %>
         
                   </span>

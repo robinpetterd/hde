@@ -80,8 +80,6 @@ class  SearchPersonResultsPage_Controller extends Page_Controller {
 		if(!isset($_GET['start']) || !is_numeric($_GET['start']) || (int)$_GET['start'] < 1) $_GET['start'] = 0;
   		$SQL_start = (int)$_GET['start'];
   
-		 // $colorObject = DataObject::get_one('Visual','');
-		 // $colorID =   $colorObject->ID; 
 	  
 	
 		  $workflowObject = DataObject::get_one('WorkFlow','Name = "Publish"');
@@ -97,7 +95,6 @@ class  SearchPersonResultsPage_Controller extends Page_Controller {
 			
 			$Person_SQL = Convert::raw2sql($Person); 
 			 	
-			//Debug::show("VisualID != '{$colorID}' AND StatusID = '{$workflowID}' AND Name LIKE '{%$Person_SQL}%'");
 
 		   $people = DataObject::get("Person",
 									 "StatusID = '{$workflowID}' AND Name LIKE '%{$Person_SQL}%' ",

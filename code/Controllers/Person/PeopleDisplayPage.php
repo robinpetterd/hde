@@ -90,30 +90,22 @@ class  PeopleDisplayPage_Controller extends Page_Controller {
 		if(!isset($_GET['start']) || !is_numeric($_GET['start']) || (int)$_GET['start'] < 1) $_GET['start'] = 0;
   		$SQL_start = (int)$_GET['start'];
   
-	  $colorObject = DataObject::get_one('Visual','Name = "White"');
-	  $colorID =   $colorObject->ID; 
 	  
 	
 	  $workflowObject = DataObject::get_one('WorkFlow','Name = "Publish"');
 	  $workflowID = $workflowObject->ID; 
 	  
-	 
-
-	     $ID_SQL = Convert::raw2sql($colorID); 
-		
+			
 		///Debug::show($ID_SQL);
 
-
-	  
-	 // $people = DataObject::get('Person','VisualID = "$color" AND StatusID = "1"'); //Get all the blacks and the ones that are published.  
 
 		if(Permission::check(0)){//Check to see if viewer is login 
 			//What happen if the user is logged
 			
-			Debug::show("You are logged in so you getting a list of all the people");
+			Debug::show("You are logged in so you getting a list of all the people - including the people that haven't been published .");
 			
 			$people = DataObject::get("Person",
-									  "VisualID != '{$colorID }'",
+									  "'",
 									  //"SUBSTRING_INDEX(Name, ' ', -1) ",//Sorts by last name
 									  "Name ASC",
 									  "",
@@ -121,18 +113,18 @@ class  PeopleDisplayPage_Controller extends Page_Controller {
 			
 			//$people ->sort('Name');
 			
-		$featured = DataObject::get("Person","VisualID != '{$colorID }' AND Featured=TRUE" ); //Get all the blacks 
+		$featured = DataObject::get("Person","Featured=TRUE" ); //Get all the blacks 
 
 
 		} else {
 		   $people = DataObject::get("Person",
-									 "VisualID != '{$colorID }' AND StatusID = '{$workflowID}'",
+									 "StatusID = '{$workflowID}'",
 									  //"SUBSTRING_INDEX(Name, ' ', -1) ",//Sorts by last name
 									  "Name ASC",
 									  "",
 									  
 									  "{$SQL_start},50"); //Get all the blacks 
-		$featured = DataObject::get("Person","VisualID != '{$colorID }' AND Featured=TRUE" ); //Get all the blacks 
+		$featured = DataObject::get("Person","Featured=TRUE" ); //Get all the blacks 
 
 
 		}

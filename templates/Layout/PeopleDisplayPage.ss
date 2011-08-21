@@ -47,7 +47,7 @@
                                               <% end_control %>
                                         <% else %>
                                 
-                                       <% control Visual %>
+                                       <% control Role %>
                                             <% control Image %>
                      										 <% control SetWidth(175)  %>
                                                                          <img src="$URL" alt="Icon of the $Top.Name"/>
@@ -82,7 +82,7 @@
                                               <% end_control %>
                                         <% else %>
                                 
-                                       <% control Visual %>
+                                       <% control Role %>
                                             <% control Image %>
                      										 <% control SetWidth(175)  %>
                                                                          <img src="$URL" alt="Icon of the $Top.Name"/>
@@ -113,10 +113,7 @@
 
          <span class="" >
          <% if Age %> $Age <% end_if %>
-          <% control BON %>
-           		<% if Description %>, $Description<% end_if %>  
 
-          <% end_control %>
                           <% if CurrentMember %><strong>PERSON ID = $ID</strong><% end_if %>
 
           </span>

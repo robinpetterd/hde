@@ -34,14 +34,13 @@ function people() {
 
 			$eventData = DataObject::get("EventData","Person.StatusID = 1","","LEFT JOIN Person ON KnownAsID",""); // Get all the Event Data and only get the people that have been published. 
 
-			$LoyalistClaims = DataObject::get("LoyalistClaims","Person.StatusID = 1","","LEFT JOIN Person ON KnownAsID",""); // Get all the Event Data and only get the people that have been published. 
 
 
 			//Debug::show($people);
 			
 			header("Content-type: text/xml");	
 			return $this->customise(
-			array('People' => $people,'EventRelationships' => $eventRelationships,'Relationships' => $relationships,'EventData' => $eventData, 'LoyalistClaims' => $LoyalistClaims))
+			array('People' => $people,'EventRelationships' => $eventRelationships,'Relationships' => $relationships,'EventData' => $eventData))
 			->renderWith('Network');
 			//return $people;
 						  

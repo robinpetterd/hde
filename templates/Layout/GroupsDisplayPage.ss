@@ -45,7 +45,7 @@
                                               <% end_control %>
                                         <% else %>
                                 
-                                       <% control Visual %>
+                                       <% control Role %>
                                             <% control Image %>
                      										 <% control SetWidth(175)  %>
                                                                          <img src="$URL" alt="Icon of the $Top.Name"/>

@@ -35,12 +35,11 @@ class  HomePage_Controller extends Page_Controller {
 	   	
 	 //Need to do this all the data objects where we might find the person.  
 	  
-	    $colorObject = DataObject::get_one('Visual','Name = "White"');
-	    $colorID =   $colorObject->ID; 
+	   
 	
 			
 		$FeaturedPerson = DataObject::get_one("Person",
-									  "VisualID != '{$colorID }' AND Featured=TRUE",
+									  "Featured=TRUE",
 									  //"SUBSTRING_INDEX(Name, ' ', -1) ",//Sorts by last name
 									  "",
 									  "RAND()",
@@ -92,7 +91,7 @@ class  HomePage_Controller extends Page_Controller {
 		
  
 		$fields = new FieldSet();
-		$fields->push(new TextField('Person','Search for a runaway',$Person));
+		$fields->push(new TextField('Person','Search for a Person',$Person));
  
 		$actions = new FieldSet(
 			new FormAction('FormAction','Search')

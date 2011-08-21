@@ -64,37 +64,23 @@ class LocationDisplayPage_Controller extends Page_Controller {
 		$Location = Session::get("Loc");
 		//Debug::Show($Location);		
 		$LocID = $Location->ID;
-		
-	    $Owners = DataObject::get(
-							"Owner",
-							 "LocationID = {$LocID}"
-							 //"Events.YEAR ASC",
-							 //"LEFT JOIN BONData_Owner ON BONData.ID = BONData_Owner.BONDataID 
-							  //LEFT JOIN Events ON Events.ID = EventData.EventID ",
-							 //"1"
-							 );
+	   
 		
 		 $LocEvents = DataObject::get(
 							"Events",
 							 "LocationID = {$LocID}"
-							 //"Events.YEAR ASC",
-							 //"LEFT JOIN BONData_Owner ON BONData.ID = BONData_Owner.BONDataID 
-							  //LEFT JOIN Events ON Events.ID = EventData.EventID ",
-							 //"1"
+							
 							 );
 		
 		 $Ships = DataObject::get(
 							"Ship",
 							 "LeavesFromID = {$LocID} or LocationID = {$LocID} "
-							 //"Events.YEAR ASC",
-							 //"LEFT JOIN BONData_Owner ON BONData.ID = BONData_Owner.BONDataID 
-							  //LEFT JOIN Events ON Events.ID = EventData.EventID ",
-							 //"1"
+							
 							 );
 							 
 		//Debug::Show($Ships);		
 		
-		return new ArrayData(array("Owners" => $Owners, "LocEvents" => $LocEvents,"Ships" => $Ships ));	
+		return new ArrayData(array("LocEvents" => $LocEvents,"Ships" => $Ships ));	
 		
 		//return 	$events->buildNestedUL(2);
       }

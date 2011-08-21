@@ -21,7 +21,6 @@ class Loc extends DataObject {
    
       static $has_many = array(
 		 'Ship'=>'Ship',
-		 'Owner' => 'Owner',
 		 'Events' => 'Events',
       );	  
    	
@@ -58,7 +57,6 @@ class Loc extends DataObject {
 		 
 
 	 		$fields->removeByName('Ship'); //We remove this event at this stage because in actual data it's harded wired. 
-		    $fields->removeByName('Owner');
 		    $fields->removeByName('Events');
 
 			  

@@ -83,40 +83,18 @@
                                 
                 <h3 >People in this repository that where part of this event</h3>
                 
-                                   
-                                   <% if EventType == BONData %>
-                                   <% include BONList %>
-                                   <% end_if %>
+                                 
                                    
                                     <% if EventType == CustomEvent %>
                                      <% include CustomEvent %>
                                    <% end_if %>
                                    
-                                      <% if EventType == TithablesData %>
-                                        <% include TithablesList %>
-                                   <% end_if %>
-                                   
+                                 
                                    
                                    
                                    <!-- Now for the relationships that relate to bon  found at this stage--> 
                                                                       
-                                   <% if EventType == BirchtownMusterData %>
-                                    <% include BirchtownMusterList %>
-                                   <% end_if %>
-                                   
-                                   
-                                   <% if EventType == SecondBirchtownMusterData %>
-                                   
-                                    <% include SecondBirchtownMuster %>
-                                   <% end_if %>
-                                   
-                                     <% if EventType == LoyalistClaims %>
-                                       <% include LoyalistClaims %>
-                                   <% end_if %>
-                                   
-                                    <% if EventType == ListSierraLeone %>
-                                       <% include ListSierraLeoneList %>
-                                   <% end_if %>
+                                 
 								   
 								                                  
                      </span>

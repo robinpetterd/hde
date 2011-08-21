@@ -46,39 +46,12 @@ class  GroupDisplayPage_Controller extends Page_Controller {
 		
 		$groupEvents->merge($GroupDataObjects);
 
-		$BONDataObjects = DataObject::get("BONData",
-												 "ServiceID = {$id}",
-												 "",
-												 "",
-												 "");
-		
-		//array_push($groupEvents, $BONDataObjects);
-		
-		$groupEvents->merge($BONDataObjects);
-		
-		$BirchTownDataObjects = DataObject::get("BirchtownMusterData",
-												 "CompanyTheyAreNowWithID = {$id}",
-												 "",
-												 "",
-												 "");
-			
-		$groupEvents->merge($BirchTownDataObjects);
-		
-		$BirchTownCompaniesDataObjects = DataObject::get("BirchtownMusterData",
-												 "BirchtownMusterData_CompaniesTheyBelongTo.myGroupsID = {$id}",
-												 "",
-												 "LEFT JOIN BirchtownMusterData_CompaniesTheyBelongTo ON BirchtownMusterData.ID =  BirchtownMusterData_CompaniesTheyBelongTo.BirchtownMusterDataID
-												  
-												  ",
-												 "");
-			
-		$groupEvents->merge($BirchTownCompaniesDataObjects);
 		
 		
 		
 		
 		
-		
+	
 	//	$groupArrayData = new ArrayData($groupEvents);
 
 		//Debug::Show($groupEvents);

@@ -4,7 +4,7 @@
   <% require javascript(hde/javascript/jcarousel/lib/jquery.jcarousel.pack.js) %>
 
   <% require css(hde/javascript/jcarousel/lib/jquery.jcarousel.css) %>
-  <% require css(hde/javascript/jcarousel/skins/bon/skin.css) %>
+  <% require css(hde/javascript/jcarousel/skins/hde/skin.css) %>
   
 <% control SourceImages %>
 	

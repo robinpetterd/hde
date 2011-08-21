@@ -59,35 +59,7 @@ function onBeforeWrite() {
 }
   
 
-function getYear() {
-	
-	$myEvent = DataObject::get_one(
-							"Events",
-							 "ID = {$this->EventID}"
-							 ); 
-	if($myEvent) { 					 
-		$year = $myEvent->Year;
-		if ($year == 0) {
-			//Debug::Show("year is zero")	;
-			//Debug::Show($this->KnownAsID);
-			
-			$currentPerson = DataObject::get_by_id('Person',$this->KnownAsID);  
-			
-			  if(stristr($myEvent->Name, 'Ran') == TRUE) {
-						$year = $currentPerson->Ran; 					 
-			}
-		  
-		   if(stristr($myEvent->Name, 'Born') == TRUE) {
-						$year = $currentPerson->Born; 					 
-			}
-		}
-		 //Debug::Show($currentPerson);
 
-	} else { $year = "";}
-	
-	
-	return $year;
-}
 
 
 function getRel() {

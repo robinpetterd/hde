@@ -50,21 +50,7 @@
 
        <% if People %>
        <div class="clear"></div>
-               <h4>Owners</h4>
-              <% control People %>
-                  <% if Owners %>
-                    <div id="PeopleList">
-                           <div class="clear"></div>
-
-                        <ul>
-                             <% control Owners %>
-                                    <li> <a href="person/display/$ID">$Name</a></li>
-                             <% end_control %>
-                   
-                        <ul>
-                    </div>
-      		 <% end_control %>
-       <% end_if %>
+            
                  
                                  
        <% control People %>

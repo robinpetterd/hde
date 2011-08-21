@@ -345,37 +345,13 @@ var TabbedPanels1 = new Spry.Widget.TabbedPanels("TabbedPanels1");
          
         </span>
           <span class="EventDataTable">
-                   <% if ClassName == TithablesData %>
-                   <% include TithablesData %>
-                   <% end_if %>
-                   
-                   
-                   <% if ClassName == BONData %>
-                   <% include BON %>
-                   <% end_if %>
-            
-                   
-      <% if ClassName == BirchtownMusterData %>
-                   <% include BirchtownMuster %>
-                   <% end_if %>                   
-                                                        
+                                         
                           
                     <% if ClassName == CustomEvent %>
                   	 <% include CustomEvent %>
                    <% end_if %>
                    
                    
-                   <% if ClassName == SecondBirchtownMusterData %>
-                   <% include SecondBirchtownMuster %>
-                   <% end_if %>
-                   
-                     <% if ClassName == LoyalistClaims %>
-                	   <% include LoyalistClaims %>
-                   <% end_if %>
-				   
-                   <% if ClassName == ListSierraLeone  %>
-                	   <% include ListSierraLeone %>
-                   <% end_if %>
                    
                    
                    

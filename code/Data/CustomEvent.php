@@ -7,7 +7,7 @@ class CustomEvent extends EventData {
       
 	 // 'Name' => 'Text',
 	 'Transcript' => 'HTMLText', //// Just a general transcript field 
-	  'Narrative' => 'Text',  //What the data entry person thought
+	 'Narrative' => 'Text',  //What the data entry person thought
 
    );
 
@@ -143,16 +143,11 @@ class CustomEvent extends EventData {
 					
 			} else {$LastSource=0;};
 			
-			
-			 
-			 
+						 
 			 
 			 $myimage  = new FileIFrameField('SourceFile','Choose the source file'); 
 			
-			  //$myimage->value = $LastSource; 
-
-				// $myimage::setFolderName()  =  'bon'; 
-  			 
+			  //$myimage->value = $LastSource;   			 
 			 $fields->addFieldToTab("Root.Main",  $myimage);
 			  
 											

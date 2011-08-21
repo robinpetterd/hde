@@ -31,7 +31,7 @@
               <% if ClassName != CustomEvent %>
               
           		        <% if ClassName != EventData %>
-              details:	"<p class='EventDataTable'><table> <tr><th>Name</th><th >Owner</th> <th><% if Narrative %>[Narrative]<% end_if %></span></th></tr> <tr> <td class='Start'>$FirstName  $LastName</td><td>  <% control Owner %>  <a href='person/display/$ID\'>$Name</a> - $Location.Name <% end_control %></td>  <td><span class='assumed'> <% if Narrative %>[$Narrative]</span><% end_if %></td> </tr></table></p>",
+              details:	"<p class='EventDataTable'><table> <tr><th>Name</th><th >Owner</th> <th><% if Narrative %>[Narrative]<% end_if %></span></th></tr> <tr> <td class='Start'>$FirstName  $LastName</td><td> </td>  <td><span class='assumed'> <% if Narrative %>[$Narrative]</span><% end_if %></td> </tr></table></p>",
          			    <% end_if %>
 
               <% end_if %>

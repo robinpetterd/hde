@@ -3,13 +3,12 @@
 class DataAdmin extends ModelAdmin {
    
   public static $managed_models = array(
-      'BONData','BirchtownMusterData','TithablesData','SecondBirchtownMusterData','LoyalistClaims','ListSierraLeone','CustomEvent','EventData'
+     'CustomEvent','EventData'
    );
   
 
   static $model_importers = array(
-      'BirchtownMusterData' => 'BirchtownMusterImporter' ,
-	  'ListSierraLeone' => 'ListSierraLeoneImporter'
+
    );
   
   

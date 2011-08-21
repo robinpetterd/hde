@@ -1,7 +1,7 @@
 <?php 
 
 
-class Visual extends DataObject {
+class Role extends DataObject {
 	
 		static $api_access = true;
    function canView() { return true; }

@@ -2,7 +2,7 @@
 <graph>
 
 
-<% control People %><node id="$ID" name="$Name" narrative="" role="$Visual.Name" age="<% control BON %><% if Age %>$Age<% end_if %><% end_control %>" ></node>
+<% control People %><node id="$ID" name="$Name" narrative="" role="$Visual.Name" age="" ></node>
 <% end_control %>
 
 <!-- Start of the EventRelationship -->
@@ -34,12 +34,7 @@
 						<% if Owner %> 	
 <edge type="Ownership" source="$ClassName" fromID="$KnownAs.ID" toID="<% control Owner %>$ID<% end_control %>"  thickness="8" color="0" alpha="1" ></edge>
                         <% end_if %>  <% end_if %>
-                   <% if ClassName == BONData %>
-                            <% if Owner %> 	
-<edge type="Ownership" source="$ClassName" fromID="$KnownAs.ID" toID="<% control Owner %>$ID<% end_control %>"  thickness="8" color="0" alpha="1"  ></edge>
-                            <% end_if %>
-     <% end_if %>  
-							
+		
 							
 							
                    <% if ClassName == BirchtownMusterData %>

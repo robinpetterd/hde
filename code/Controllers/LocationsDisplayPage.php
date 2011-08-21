@@ -36,23 +36,7 @@ class  LocationsDisplayPage_Controller extends Page_Controller {
 	  
    
    function map() {
-		  //header("Content-Type: application/vnd.google-earth.kml+xml"); 
-			/*$LocData = new DataObjectSet();
-			
-			$Location = DataObject::get("Loc",
-											   "",
-											   "",
-											   "LEFT JOIN Events ON Events.LocationID = Loc.ID",
-												""
-												 ); //G		
-			 
-			 $LocData->push($Location);
-
-		     $out =  $Location->renderWith("map"); 
-			 //Debug::Show( $LocData);
-			 Debug::Show( $out);
-
-		return $out; */
+		 
 		
 		header("Content-type: text/xml");
 		die($this->renderWith(array('map')));
@@ -92,26 +76,12 @@ class  LocationsDisplayPage_Controller extends Page_Controller {
 	 	 	
 				$LocID = $Loc->ID;
 
-			 	$Owners = DataObject::get(
-							"Owner",
-							 "LocationID = {$LocID}"
-							 //"Events.YEAR ASC",
-							 //"LEFT JOIN BONData_Owner ON BONData.ID = BONData_Owner.BONDataID 
-							  //LEFT JOIN Events ON Events.ID = EventData.EventID ",
-							 //"1"
-							 );
 
-				if(($Owners != Null)   ) {
-					 $LocsSet->push($Loc);
-				    } else {
-				    	
-						   $LocEvents = DataObject::get(
+					    	
+			  $LocEvents = DataObject::get(
 										"Events",
 										 "LocationID = {$LocID}"
-										 //"Events.YEAR ASC",
-										 //"LEFT JOIN BONData_Owner ON BONData.ID = BONData_Owner.BONDataID 
-										  //LEFT JOIN Events ON Events.ID = EventData.EventID ",
-										 //"1"
+										
 										 );
 						if(($LocEvents != Null)   ) {
 							 $LocsSet->push($Loc);
@@ -119,15 +89,12 @@ class  LocationsDisplayPage_Controller extends Page_Controller {
 							  $Ships = DataObject::get(
 										"Ship",
 										 "LeavesFromID = {$LocID} or LocationID = {$LocID} "
-										 //"Events.YEAR ASC",
-										 //"LEFT JOIN BONData_Owner ON BONData.ID = BONData_Owner.BONDataID 
-										  //LEFT JOIN Events ON Events.ID = EventData.EventID ",
-										 //"1"
+										
 								 );
 								if(($Ships != Null)   ) {
 								 $LocsSet->push($Loc);
 							}	 
-						}
+						
 				      
 			    };
 				
