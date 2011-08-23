@@ -1,9 +1,9 @@
 <?php 
 
 class Events extends DataObject {
-
-	  	static $api_access = true;
-        function canView() { return true; }
+    
+    static $api_access = true;
+    function canView() { return true; }
    
    
     static $db = array(
@@ -25,7 +25,7 @@ class Events extends DataObject {
 
    );
 	
-	 static $defaults = array(
+        static $defaults = array(
     	"RuleFeatured" => 'False',
   	);
   
@@ -78,10 +78,10 @@ class Events extends DataObject {
 			  
 			  //Do the same thing for the groups 
 			  
-			  
-			  $fields->removeByName('Group');
+			  //TODO - add nice group management back on 
+			 // $fields->removeByName('Group');
 		 
-			  $groupTablefield = new ManyManyDataObjectManager(
+			  /*$groupTablefield = new ManyManyDataObjectManager(
 				 $this,
 				 'Group',
 				 'myGroups',
@@ -92,11 +92,11 @@ class Events extends DataObject {
 			 
 			// $peopleTablefield->setAddTitle( 'A Module' );
 		 
-			  $fields->addFieldToTab("Root.Group or Groups", $groupTablefield);
+			  //$fields->addFieldToTab("Root.Group or Groups", $groupTablefield);*/
 			  
 			  
-		  
-		 $fields->removeByName('Information Page');
+		  //TODO about the information page working again  
+		/*$fields->removeByName('Information Page');
 
 			$infoOnTablefield = new ManyManyDataObjectManager(
 				 $this,
@@ -107,7 +107,7 @@ class Events extends DataObject {
 				 ),'	'
 			  );
 		
-			$fields->addFieldToTab("Root.Information Pages", $infoOnTablefield);
+			$fields->addFieldToTab("Root.Information Pages", $infoOnTablefield);*/
 
 			
 			$fields->removeByName('Data');
