@@ -5,12 +5,13 @@ class Events extends DataObject {
     static $api_access = true;
     function canView() { return true; }
    
-   
+    static $default_sort = "\"Sort\"";
+
     static $db = array(
 	  'Name' =>  'Text',
  		
-	   'Day' => 'Int', 
-	   'Month' =>  'Int',
+	  'Day' => 'Int', 
+	  'Month' =>  'Int',
 	  'Year' => 'Int', 
 	  
 	  'Information' => 'Text',
