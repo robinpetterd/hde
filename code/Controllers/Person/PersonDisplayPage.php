@@ -9,7 +9,7 @@ class  PersonDisplayPage_Controller extends Page_Controller {
 
 	function init() {
 				
-				parent::init();
+                Parent::init();
 
 		//Requirements::javascript("hde/javascript/qtip/jquery-1.3.2.min.js");
 		

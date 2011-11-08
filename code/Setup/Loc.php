@@ -26,17 +26,6 @@ class Loc extends DataObject {
    	
 
  
-   /*
-   static $db = array(
-      'Name' => 'Varchar',
-	  'Lat' => 'Float',
-	  'Long' => 'Float'
-	  );*/
- 
-//TDDO - does this need some sort of narrative about the place ? should this link to a information page instead of here. 	
-	//static $has_one = array(
-      //'Image' => 'Image'
-   //);
 	
   
    static $searchable_fields = array(
@@ -57,8 +46,9 @@ class Loc extends DataObject {
 		 
 
 	 		$fields->removeByName('Ship'); //We remove this event at this stage because in actual data it's harded wired. 
-		    $fields->removeByName('Events');
-
+		        $fields->removeByName('Events');
+                        
+                        
 			  
 					
 			  return $fields;

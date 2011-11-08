@@ -23,6 +23,9 @@ SSViewer::set_source_file_comments(false);
 
 Director::addRules(8, array('dump//$Action' => 'MySQLDump'));
 Director::addRules(50, array('network/$Action/$ID/$Name' => 'NetworkVis_Controller'));
+Director::addRules(50, array('linkages/$Action/$ID/$Name' => 'Linkages'));
+Director::addRules(50, array('image/$Action/$ID/$Name' => 'SourceImageDisplayPage_Controller'));
+
 
 SSViewer::setOption('rewriteHashlinks',true);
 

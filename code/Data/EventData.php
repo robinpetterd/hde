@@ -145,7 +145,7 @@ function getRel() {
 									   $content = $labelText
 			   );
 			
-			$fields->addFieldToTab("Root.Main",$label);
+                            $fields->addFieldToTab("Root.Main",$label);
 				
 				
 				

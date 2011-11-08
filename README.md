@@ -8,7 +8,6 @@
 
 Silverstripe 2.4
 DataObject Manager
-
 Suitable theme eg - https://github.com/sproutlabs/theme-blackloyalist
 
 ## Links ##

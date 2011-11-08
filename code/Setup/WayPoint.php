@@ -5,6 +5,7 @@ class WayPoint extends Loc {
     
    static $db = array(
       	'Name' => 'Varchar',
+        'Time' => 'Float'// A way for representation how long it might take to this spot
     );
 
  
@@ -20,18 +21,13 @@ class WayPoint extends Loc {
    'Name' );
    
   
-      static $summary_fields = array(
+  static $summary_fields = array(
    'Name','ID'
    );
    
   public  function getCMSFields() {
 
 		$fields = parent::getCMSFields();
-	
-	
-		
-		 
-		 
 		 return $fields; 
 	 
 	 }
