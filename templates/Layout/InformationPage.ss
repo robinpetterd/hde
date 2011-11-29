@@ -1,11 +1,41 @@
-	
-		<h2>$Title</h2>
+<% require javascript(hde/javascript/jwplayer.js) %>
+
+      <h2>$Title</h2>
             
-            <div id="information">
+        <div id="information">
           
          
+     <% if Media %>
+        <div id="player">
 
-           <% if Image %>
+        </div>    
+         <script type="text/javascript">
+            jwplayer("player").setup({
+                flashplayer: "hde/flash/mediaplayer.swf",
+                 <% control Media %>
+                      <% if Media %>
+                         file: "$Media.URL",
+                      <% else %>
+                           file: "$URL",
+                      <% end_if %>
+
+                    <% if Still %>
+                        image :"$Still.URL",
+
+                     <% end_if %>
+
+                     <% end_control %>
+                controlbar: "over",
+                stretching: "uniform",
+                width: 720,
+                height: 405,
+            });
+        </script>
+
+
+     <% else %>
+               
+      <% if Image %>
               
                 <% control Image %>
                        <% control SetWidth(300) %>
@@ -30,6 +60,13 @@
 
             <% end_if %>
 
+
+     <% end_if %>
+     
+     
+     
+     
+         
 
              
 		$Content
@@ -70,4 +107,4 @@ for(i = 0; i < As.length; i++) {
  
 
 
-</script
+</script>

@@ -8,7 +8,7 @@ class Information extends Page {
    static $has_one = array(
    );
    
- static $allowed_children = array('InformationPage','Information');
+   static $allowed_children = array('InformationPage','Information');
    static $default_child = 'InformationPage';
 }
  

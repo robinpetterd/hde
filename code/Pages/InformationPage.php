@@ -5,23 +5,21 @@
 class InformationPage extends Page {
 	 
   static $default_parent = "Information";
- static $can_be_root = false;
- 
-  
-  
+   static $can_be_root = false;
+   
    static $db = array(
-	'Summary'=>'HTMLText'
+	'Summary'=>'HTMLText',
+        'ShowOnHome' => 'Boolean'
    );
    static $has_one = array(
 	 'Image' =>'File',
-	'Icon' =>'File'
+	 'Icon' =>'File'
 
    );
    
     static $many_many = array(
       'References' => 'Reference',
-
-
+       'Media' => 'MediaAsset',
    );
 	
 	static $belongs_many_many = array(
@@ -37,10 +35,27 @@ class InformationPage extends Page {
 	function getCMSFields() {
 
 	$fields = parent::getCMSFields();
- 	
+                
+             $fields->addFieldToTab("Root.Content.Main", new CheckboxField('ShowOnHome'));
+
 		$fields->addFieldToTab("Root.Content.Image", new ImageField('Icon'));
 
 		$fields->addFieldToTab("Root.Content.Image", new ImageField('Image'));
+                
+                $MediaManager = new ManyManyComplexTableField(
+                                        $this, // Controller
+                                        'Media', // Source name
+                                        'MediaAsset', // Source class
+                                        array(
+                                                'Title' => 'Title',
+                                        ), // Headings  
+                                        'getCMSFields_forPopup' // Detail fields (function name or FieldSet object)
+                                        // Filter clause
+                                        // Sort clause
+                                        // Join clause
+                                );
+
+                                 $fields->addFieldToTab("Root.Content.Media", $MediaManager);
 
  		
       $referenceTablefield = new ManyManyComplexTableField(

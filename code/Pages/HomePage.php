@@ -9,7 +9,7 @@ static $db = array (
 
 		  public function getCMSFields()
 			{
-						$f = parent::getCMSFields();
+                        $f = parent::getCMSFields();
 
 			 $f->addFieldToTab('Root.Content.Main', new HtmlEditorField( $name = 'ContentBelow', $title='Content that goes below featured person','Content'));
 				
@@ -24,13 +24,43 @@ class  HomePage_Controller extends Page_Controller {
 
 	function init() {
               parent::init();
-			  
+              Requirements::set_write_js_to_body(false);
+            Requirements::set_write_js_to_body(false);
+
+
+			Requirements::css('sicklist/css/DynamicLayoutPage.css');
+                        Requirements::javascript('sicklist/thirdparty/jquery-1.6.4.min.js');
+
+			Requirements::javascript('sicklist/thirdparty/jquery.masonry.min.js');
 
 				  
           }
 	  
 	  
-	  		   
+function BackgroundPages() {
+	   	
+	 //Need to do this all the data objects where we might find the person.  
+	  
+
+		///Debug::show($ID_SQL);
+
+		$back = DataObject::get("InformationPage",
+											  "ShowOnHome = 1",// Only show the pages we should sohw 
+											  //"SUBSTRING_INDEX(Name, ' ', -1) ",//Sorts by last name
+											  "",
+											  "",
+											  ""); //Get all the blacks 
+	
+		//Debug::show($back);
+                
+	 	return $back;
+	 
+	 
+	  
+   }
+ 
+   
+   
    function FeaturedPerson() {
 	   	
 	 //Need to do this all the data objects where we might find the person.  
